@@ -15,15 +15,15 @@ type MainPage struct {
 
 
 {% func (p *MainPage) Body() %}
-	<h1>Main page</h1>
-	<div>
-		Click links below:
+	<header>Main page</header>
+	<aside>
+		Menu:
 		<ul>
 			<li><a href="/table?rowsCount=42">Table page</a></li>
-			<li><a href="/unknown-page">Error page</a></li>
+			<li><a d="/unknown-page">Error page</a></li>
 		</ul>
-	</div>
-	<div>
+	</aside>
+	<main>
 		Some info about you:<br/>
 		IP: <b>{%s p.CTX.RemoteIP().String() %}</b><br/>
 		User-Agent: <b>{%z p.CTX.UserAgent() %}</b><br/>

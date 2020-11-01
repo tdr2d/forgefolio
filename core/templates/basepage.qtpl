@@ -13,13 +13,9 @@ Page prints a page implementing Page interface.
 <html>
 	<head>
 		<title>{%= p.Title() %}</title>
+		<link rel="stylesheet" href="/assets/styles.css">
 	</head>
-	<body>
-		<div>
-			<a href="/">return to main page</a>
-		</div>
-		{%= p.Body() %}
-	</body>
+	<body>{%= p.Body() %}</body>
 </html>
 {% endfunc %}
 
