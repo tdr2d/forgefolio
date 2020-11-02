@@ -1,0 +1,15 @@
+<h3>TODO SETTINGS</h3>
+<div>changeable</div>
+<ul>
+  <li>http / https</li>
+  <li>TLS certificates</li>
+  <li>max upload size</li>
+  <li>Theme options</li>
+  <li>Plugin options</li>
+</ul>
+<hr>
+<div>read only</div>
+<ul>
+  <li>assets directory</li>
+  <li>media directory</li>
+</ul>

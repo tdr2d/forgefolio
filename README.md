@@ -3,8 +3,9 @@
 - Create new project `vue create my-project`
 - Add typscript support to the project `vue add typescript`
 
-## Go jet template 
-Doc v4: https://github.com/CloudyKit/jet/blob/master/docs/syntax.md
+## Go Core
+Fiber router: https://gofiber.io/ and https://github.com/gofiber/recipes
+Jet templates: https://github.com/CloudyKit/jet/blob/master/docs/syntax.md
 
 ## Frontend
 ### Icons 

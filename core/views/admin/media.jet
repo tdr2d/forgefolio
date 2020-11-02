@@ -1,0 +1,120 @@
+<style>
+/*-------------*/
+.VPcrop{
+	width: 100px;
+	height: 100px;
+	border: 2px dashed #dcdee3;
+	margin: 3px;
+	position: relative;
+	display: inline-block;
+}
+.VPcimg{
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	top:-2px;
+	left: -2px;
+	position: absolute;
+	z-index: 2;
+}
+.VPcropint{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	text-indent: -10000;
+	opacity: 0;
+	z-index: 3;
+}
+.VPcropspan{
+	position: absolute;
+  right: 5px;
+  top: 1px;
+  padding: 3px 5px;
+  color: white;
+  transition: all .2s;
+  opacity: 0;
+  transform: scale(0);
+  cursor: pointer;
+  z-index: 4;
+}
+.VPcrop:hover .VPcropspan{
+	opacity: 1;
+	transform: scale(1);
+}
+.VPcrop:before{
+	  content: "+";
+  position: absolute;
+  top: calc(50% - 22.5px);
+  left: calc(50% - 11.5px);
+  font-size: 40px;
+  opacity: 0.3;
+  color: #000;
+  font-weight: bold;
+  z-index: 1;
+}
+</style>
+
+<form class='row' method="POST" enctype="multipart/form-data">
+  <input type="file" name="medias" multiple>
+  <input type="submit">
+</div>
+<hr>
+
+
+
+<script>
+function previewFileimg(x){
+  var file = document.getElementById(x).files[0];
+  var reader  = new FileReader();
+  reader.onloadend = function () {
+  VPcropremove = document.getElementById(x).parentNode;
+  groupcrop = VPcropremove.parentNode;
+  //
+  var t='t';
+  VPcrimg = document.createElement('img');
+  VPcrimg.className ='VPcimg';
+  VPcrimg.src = "";
+  VPcrimg.id ='VPcrimg'+t;
+  VPcropremove.appendChild(VPcrimg);
+  VPcrimg.src = reader.result;
+  //
+  VPcropremove.id = 'VPcropremove'+t;
+  VPcropsw = document.createElement("input");
+  VPcropsw.id= document.getElementById(x).id;
+  VPcropsw.className = document.getElementById(x).className;
+  VPcropsw.value = file.name;
+  VPcropsw.name =document.getElementById(x).name;
+  VPcropremove.appendChild(VPcropsw);
+  //
+  VPcropspan = document.createElement('span');
+  VPcropspan.className ='VPcropspan';
+  VPcropspan.id = "VPcropspan"+t;
+  VPcropspan.innerHTML = 'x';
+  VPcropspan.setAttribute('onclick',''+VPcropremove.id+'.remove()');
+  VPcropremove.appendChild(VPcropspan);
+  //
+  VPcorpKt = document.createElement('div');
+  VPcorpKt.className = 'VPcrop';
+  VPcorpKt.id = 'VPcorpKt'+t;
+  groupcrop.appendChild(VPcorpKt);
+  //
+  VPcropint = document.createElement('input');
+  VPcropint.className ='VPcropint';
+  VPcropint.name = '';
+  VPcropint.type ='file';
+  VPcropint.value='';
+  VPcropint.id='VPcropint'+t;
+  VPcropint.accept =document.getElementById(x).accept;
+  VPcropint.setAttribute('onchange','previewFileimg("'+VPcropint.id+'")');
+  VPcorpKt.appendChild(VPcropint);
+  document.getElementById(x).remove();
+      }
+    if (file) {
+          reader.readAsDataURL(file); //reads the data as a URL
+      } else {
+          PoundNote('Thông Báo','Bạn chưa chọn hình ảnh',1);
+      }
+}
+
+</script>

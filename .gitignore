@@ -27,3 +27,7 @@ pnpm-debug.log*
 *.so
 *.pb.go
 *.qtpl.go
+
+
+# Core
+core/assets/media/

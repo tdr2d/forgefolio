@@ -1,6 +1,6 @@
 package admin
 
-type HeaderData struct {
+type HeadData struct {
 	title  string
 	styles []string
 }
@@ -8,7 +8,7 @@ type HeaderData struct {
 var DEFAULT_TITLE string = "My default title"
 var DEFAULT_STYLE string = "/style.css"
 
-func GetHeaderData() *HeaderData {
-	h := HeaderData{title: DEFAULT_TITLE, styles: []string{DEFAULT_STYLE}}
+func GetHeadData() *HeadData {
+	h := HeadData{title: DEFAULT_TITLE, styles: []string{DEFAULT_STYLE}}
 	return &h
 }

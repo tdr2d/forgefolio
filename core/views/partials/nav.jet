@@ -1,0 +1,7 @@
+<nav id="nav-core" class="">
+  <dl>
+    {{ range Navigation }}
+      <dt><a href="{{ .link }}"><i data-feather="{{ .logo }}"></i>{{ .name }}</a></li>
+    {{ end }}
+  </ul>
+</nav>
