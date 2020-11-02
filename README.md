@@ -3,11 +3,10 @@
 - Create new project `vue create my-project`
 - Add typscript support to the project `vue add typescript`
 
-## Go Quicktemplate : https://github.com/valyala/quicktemplate
-- dependencies 
-    ```
-    go get -u github.com/valyala/quicktemplate
-    go get -u github.com/valyala/quicktemplate/qtc
-    ```
-- build templates `make gen`
-- on vscode: settings > file:exclude > add `**/*.qtpl.go`
+## Go jet template 
+Doc v4: https://github.com/CloudyKit/jet/blob/master/docs/syntax.md
+
+## Frontend
+### Icons 
+https://feathericons.com/
+

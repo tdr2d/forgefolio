@@ -1,0 +1,57 @@
+body, h1, h2, h3, h4, h5, p, ul { margin: 0; padding: 0 }
+html, body, main { height: 100% }
+
+main {
+    font-family: "Work Sans",Arial,sans-serif;
+    background: linear-gradient(45deg,#29bae4 0%,#ee76ad 100%);
+    color: #222;
+}
+  
+/* Style the header */
+header {
+    background-color: #333;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    height: 60px;
+}
+
+
+section {
+    flex: 1;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+    width: 300px;
+    height: 100%;
+    border-right: 1px solid rgb(255 255 255 / 42%);
+}
+
+/* Style the list inside the menu */
+nav ul {
+list-style-type: none;
+padding: 0;
+}
+
+article {
+float: left;
+width: 70%;
+height: 300px; /* only for demonstration, should be removed */
+}
+
+/* Style the footer */
+footer {
+    background-color: #444;
+    text-align: center;
+    color: white;
+    height: 60px;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+nav, article {
+    width: 100%;
+    height: auto;
+}
+}
