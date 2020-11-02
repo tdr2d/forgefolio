@@ -4,6 +4,7 @@ import (
 	"core/admin"
 
 	fiber "github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/template/jet"
 	log "github.com/sirupsen/logrus"
 )
@@ -32,5 +33,6 @@ func main() {
 	})
 
 	app.Static("/assets/", "./assets")
+	app.Use(recover.New())
 	log.Fatal(app.Listen(port))
 }
