@@ -23,15 +23,15 @@ type mediaList struct {
 // MediaController implement media crud operations
 func MediaController(app *fiber.App) {
 	app.Get("/medias", func(c *fiber.Ctx) error {
-		cmd := exec.Command("ls", "-AgohcX", "--color=no", "--time-style=+%s", MediaDir)
-		stdouterr, err := cmd.CombinedOutput()
-		if err != nil {
-			log.Error("MediaController: cmd.Run() failed with ", err)
-			log.Error(string(stdouterr))
-			return err
+		medias := listMedia(MediaDir)
+		data := fiber.Map{
+			"Title":      "Medias",
+			"Navigation": Navigation,
+			"Medias":     medias,
+			"MediaDir":   MediaDir,
+			"BaseUrl":    c.BaseURL(),
 		}
-		medias := parseLs(string(stdouterr))
-		return c.Render("admin/media", fiber.Map{"Title": "Medias", "Navigation": Navigation, "Medias": medias, "MediaDir": MediaDir}, "layouts/main")
+		return c.Render("admin/media", data, "layouts/main")
 	})
 
 	app.Post("/medias", func(c *fiber.Ctx) error {
@@ -51,18 +51,23 @@ func MediaController(app *fiber.App) {
 	})
 }
 
-func parseLs(stdout string) []mediaList {
+func listMedia(dir string) []mediaList {
+	cmd := exec.Command("ls", "-AgohcX", "--color=no", "--time-style=+%s", MediaDir)
+	stdouterr, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Error("MediaController: cmd.Run() failed with ", err)
+		log.Error(string(stdouterr))
+		return nil
+	}
+
 	var data []mediaList = make([]mediaList, 0)
-	lines := strings.Split(stdout, "\n")
-	// fmt.Println(lines)
+	lines := strings.Split(string(stdouterr), "\n")
 	for _, line := range lines[1:] {
-		// fmt.Printf("Line: %s\n", line)
 		if line != "" && line[0] != 'd' {
 			tokens := strings.Split(line, " ")
-			// fmt.Println(tokens)
 			dateInt, err := strconv.ParseInt(tokens[3], 10, 0)
 			if err != nil {
-				fmt.Println(err)
+				log.Error(err)
 			}
 			mediaListItem := mediaList{Size: tokens[2], UpdatedAt: time.Unix(dateInt, 0), Name: tokens[4]}
 			data = append(data, mediaListItem)
@@ -70,3 +75,8 @@ func parseLs(stdout string) []mediaList {
 	}
 	return data
 }
+
+// build thumbnail of check if
+// func getImageThumbnail(path string, sizeX int, sizeY int) string {
+// TODO thumbnail
+// }

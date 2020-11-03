@@ -1,6 +1,6 @@
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>{{ Title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
@@ -8,14 +8,15 @@
   </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+{{ include "partials/modal" }}
 <main>
-{{include "partials/nav"}}
+{{ include "partials/nav" }}
 <section>
-{{include "partials/header"}}
+{{ include "partials/header" }}
 <article>
 {{ embed() }}
 </article>
-{{include "partials/footer"}}
+{{ include "partials/footer"}}
 </section>
 </main>
 <script>feather.replace()</script>

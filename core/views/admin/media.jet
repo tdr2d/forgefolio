@@ -1,18 +1,59 @@
 <style>
-
 </style>
 
 <form class='row' method="POST" enctype="multipart/form-data">
   <input type="file" name="medias" multiple>
   <input type="submit">
-</div>
+</form>
 <hr>
+
+<div class="core-media-panel">
+  <input id="media-search" class="core-input" type="text" placeholder="Search" value="">
+  <span id="media-count">0</span> Selected
+  <button id="media-delete-button" class="core-media-list__item-button feather-small button-default" type="button"><i data-feather="trash"></i></button>
+</div>
+<br>
 
 <div class="core-media-list">
 {{ range Medias }}
-  <div class=core-media-list__item>
-    <img src="{{ MediaDir}}/{{ .Name }}" alt="{{ .Name }}">
-    <span>{{ .Name }}</span>
-  </div>
+  <figure class="core-media-list__item">
+    <label class="core-media-list__item__image" for="checkbox-{{ .Name }}" style="background-image: url({{ MediaDir}}/{{ .Name }})"></label>
+    <div class="core-media-infos">
+      <input id="checkbox-{{ .Name }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name }}">
+      <a href="{{ BaseUrl }}/{{ MediaDir}}/{{ .Name }}" class="core-media-list__item-button feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
+      <button class="core-media-list__item-button feather-small button-default" type="button"><i data-feather="edit"></i></button>
+      <div class="ellipsis">{{ .Name }}</div>
+    </div>
+  </figure>
 {{ end }}
 </div>
+
+<script>
+var __core_media_checked = new Set();
+var __core_media_countEl = document.getElementById('media-count');
+
+document.querySelectorAll('.core-media-checkbox').forEach(function(checkbox){
+  checkbox.addEventListener('change', function(e){
+    if (checkbox.checked) {
+      __core_media_checked.add(checkbox.dataset.name);
+    } else {
+      __core_media_checked.delete(checkbox.dataset.name);
+    }
+    __core_media_countEl.innerText = __core_media_checked.size.toString();
+  })
+});
+
+document.getElementById('media-delete-button').addEventListener('click', function(){
+  if (__core_media_checked.size > 0) {
+    console.log('asdfasd', __core_media_checked.size > 0)
+    OpenCoreModalConfirm("Confirm deletion ?", function(){
+      console.log('TODO deleting');
+      console.log(__core_media_checked);
+    });
+  }
+})
+
+// on click rename
+// 
+
+</script>

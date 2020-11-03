@@ -1,0 +1,66 @@
+<style>
+.core-modal {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(transparent, #00000091);
+  position: absolute;
+  z-index: 98;
+}
+.core-modal-hidden { display: none !important;}
+
+.core-modal__confirm {
+    position: relative;
+    display: block;
+    /* position: absolute; */
+    z-index: 99;
+    top: 40%;
+    max-width: 90%;
+    background-color: #fafafa;
+    padding: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.core-modal__confirm > div {
+  pointer-events: none;
+}
+</style>
+
+<a class="core-modal core-modal-hidden" id="core-modal">
+  <div class="core-modal__confirm text-center">
+    <div>
+    <p id="core-modal__confirm-text">Are you sure you want to continue ?</p>
+    <br>
+    <button id="core-modal__confirm-yes" type="button" class="btn">Yes</button>
+    <button id="core-modal__confirm-no"  type="button" class="btn">No</button>
+    </div>
+  </div>
+</a>
+
+<script>
+var __core_modal = document.getElementById('core-modal');
+function toggleCoreModal() {
+  __core_modal.classList.toggle('core-modal-hidden')
+}
+__core_modal.addEventListener('click', function(e) {
+  console.log(e.target);
+  //e.stopPropagation()
+  toggleCoreModal()
+});
+
+var OpenCoreModalConfirm = function(text, yes_callback) {
+  toggleCoreModal();
+  var textP = document.getElementById('core-modal__confirm-text');
+  if (text) { textP.innerText = text; } 
+  document.getElementById('core-modal__confirm-yes').addEventListener('click', function(e){
+    e.preventDefault(); e.stopPropagation();
+    yes_callback();
+    toggleCoreModal();
+  });
+  document.getElementById('core-modal__confirm-no').addEventListener('click', function(e){
+    e.preventDefault(); e.stopPropagation();
+    toggleCoreModal();
+  });
+}
+
+</script>
