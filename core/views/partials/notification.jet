@@ -1,0 +1,44 @@
+<style>
+.core-notification {
+  position: absolute;
+  top: 100%;
+  color: #fff;
+  background-color: #2ac72b;
+  padding: 15px;
+  width: 150px;
+  left: 50%;
+  border-radius: 1px;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.core-notification--hidden { display: none !important; }
+.core-notification--translated {
+  transition: transform 0.35s ease-in-out, opacity 1s ease-in-out;
+  transform: translateY(-100px) !important;
+}
+.core-notification--transparent { opacity: 0 !important; }
+
+</style>
+<div id="core-notification" class="core-notification">Action successfull</div>
+
+<script>
+var __core_notification = document.getElementById('core-notification');
+var __core_notification_locks = [];
+var CoreNotificationNotify = function(message) {
+  __core_notification_locks.forEach(function(lock) { clearTimeout(lock); })
+  __core_notification_locks = [];
+  __core_notification.classList.remove('core-notification--translated')
+  __core_notification.classList.remove('core-notification--transparent')
+  __core_notification.classList.add('core-notification--hidden')
+  __core_notification.classList.remove('core-notification--hidden')
+
+  if (message) {
+    __core_notification.innerText = message;
+  }
+  __core_notification_locks.push(setTimeout(function(){ __core_notification.classList.add('core-notification--translated'); }, 1000/15));
+  var timeout = 2000;
+  __core_notification_locks.push(setTimeout(function(){ __core_notification.classList.add('core-notification--transparent'); }, timeout))
+  __core_notification_locks.push(setTimeout(function(){ __core_notification.classList.remove('core-notification--translated'); }, timeout + 1000))
+}
+</script> 

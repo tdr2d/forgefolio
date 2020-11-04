@@ -51,6 +51,15 @@ func MediaController(app *fiber.App) {
 		return c.Redirect("/medias")
 	})
 
+	app.Patch("/medias/:name", func(c *fiber.Ctx) error {
+		media := c.Params("name")
+		newName := c.FormValue("new_name")
+		if err := os.Rename(fmt.Sprintf("%s/%s", MediaDir, media), fmt.Sprintf("%s/%s", MediaDir, newName)); err != nil {
+			log.Error(err)
+		}
+		return c.SendStatus(204)
+	})
+
 	app.Delete("/medias", func(c *fiber.Ctx) error {
 		medias := strings.Split(c.FormValue("medias"), ",")
 		log.Info("DELETE /medias ", medias)
