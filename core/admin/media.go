@@ -2,6 +2,7 @@ package admin
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 	"strconv"
 	"strings"
@@ -48,6 +49,17 @@ func MediaController(app *fiber.App) {
 			}
 		}
 		return c.Redirect("/medias")
+	})
+
+	app.Delete("/medias", func(c *fiber.Ctx) error {
+		medias := strings.Split(c.FormValue("medias"), ",")
+		log.Info("DELETE /medias ", medias)
+		for _, media := range medias {
+			if err := os.Remove(fmt.Sprintf("%s/%s", MediaDir, media)); err != nil {
+				log.Error(err)
+			}
+		}
+		return c.SendStatus(204)
 	})
 }
 

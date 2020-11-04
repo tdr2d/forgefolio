@@ -96,4 +96,13 @@ footer {
     display: flex;
     align-items: center;
 }
-/* .core-media-infos__text { max-width: calc(100% - 76px); } */
+.core-media-infos__input {
+    margin-left: 13px;
+}
+
+input.core-input-text {
+    border: none;
+    padding: 0;
+    outline: none;
+    border-bottom: 1px solid #CCC;
+}

@@ -4,14 +4,13 @@
   height: 100%;
   background: radial-gradient(transparent, #00000091);
   position: absolute;
-  z-index: 98;
+  z-index: 2;
 }
 .core-modal-hidden { display: none !important;}
 
 .core-modal__confirm {
-    position: relative;
+    position: absolute;
     display: block;
-    /* position: absolute; */
     z-index: 99;
     top: 40%;
     max-width: 90%;
@@ -19,10 +18,8 @@
     padding: 20px;
     left: 50%;
     transform: translate(-50%, -50%);
-    pointer-events: none;
 }
 .core-modal__confirm > div {
-  pointer-events: none;
 }
 </style>
 
@@ -39,28 +36,31 @@
 
 <script>
 var __core_modal = document.getElementById('core-modal');
-function toggleCoreModal() {
-  __core_modal.classList.toggle('core-modal-hidden')
+var __core_modal_confirem_yes = document.getElementById('core-modal__confirm-yes');
+var __core_modal_confirem_no = document.getElementById('core-modal__confirm-no');
+function toggleCoreModal() { 
+  __core_modal.classList.toggle('core-modal-hidden');
 }
 __core_modal.addEventListener('click', function(e) {
-  console.log(e.target);
-  //e.stopPropagation()
-  toggleCoreModal()
+  if (e.target && e.target.id == 'core-modal') {
+    e.stopPropagation()
+    toggleCoreModal()
+  }
 });
 
 var OpenCoreModalConfirm = function(text, yes_callback) {
   toggleCoreModal();
   var textP = document.getElementById('core-modal__confirm-text');
   if (text) { textP.innerText = text; } 
-  document.getElementById('core-modal__confirm-yes').addEventListener('click', function(e){
+  __core_modal_confirem_yes.onclick = function(e) {
     e.preventDefault(); e.stopPropagation();
     yes_callback();
     toggleCoreModal();
-  });
-  document.getElementById('core-modal__confirm-no').addEventListener('click', function(e){
+  };
+  __core_modal_confirem_no.onclick = function(e){
     e.preventDefault(); e.stopPropagation();
     toggleCoreModal();
-  });
+  };
 }
 
 </script>

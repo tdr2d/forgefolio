@@ -1,6 +1,3 @@
-<style>
-</style>
-
 <form class='row' method="POST" enctype="multipart/form-data">
   <input type="file" name="medias" multiple>
   <input type="submit">
@@ -8,7 +5,6 @@
 <hr>
 
 <div class="core-media-panel">
-  <input id="media-search" class="core-input" type="text" placeholder="Search" value="">
   <span id="media-count">0</span> Selected
   <button id="media-delete-button" class="core-media-list__item-button feather-small button-default" type="button"><i data-feather="trash"></i></button>
 </div>
@@ -21,8 +17,10 @@
     <div class="core-media-infos">
       <input id="checkbox-{{ .Name }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name }}">
       <a href="{{ BaseUrl }}/{{ MediaDir}}/{{ .Name }}" class="core-media-list__item-button feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
-      <button class="core-media-list__item-button feather-small button-default" type="button"><i data-feather="edit"></i></button>
-      <div class="ellipsis">{{ .Name }}</div>
+      <input type=text class="core-media-infos__input core-input-text" value="{{ .Name }}">
+      <button class="core-media-infos__save feather-small button-default" type="button" data-name="{{ .Name }}" data-newname="">
+        <i data-feather="save"></i>
+      </button>
     </div>
   </figure>
 {{ end }}
@@ -31,7 +29,9 @@
 <script>
 var __core_media_checked = new Set();
 var __core_media_countEl = document.getElementById('media-count');
+var __core_media_deleteEl = document.getElementById('media-delete-button');
 
+// Checkboxes
 document.querySelectorAll('.core-media-checkbox').forEach(function(checkbox){
   checkbox.addEventListener('change', function(e){
     if (checkbox.checked) {
@@ -43,17 +43,34 @@ document.querySelectorAll('.core-media-checkbox').forEach(function(checkbox){
   })
 });
 
-document.getElementById('media-delete-button').addEventListener('click', function(){
+// Delete
+__core_media_deleteEl.addEventListener('click', function(){
   if (__core_media_checked.size > 0) {
-    console.log('asdfasd', __core_media_checked.size > 0)
     OpenCoreModalConfirm("Confirm deletion ?", function(){
-      console.log('TODO deleting');
-      console.log(__core_media_checked);
+      var formData = 'medias=' + encodeURIComponent(Array.from(__core_media_checked).join(','))
+      fetch(document.location.origin + '/medias', {
+        method: 'DELETE',
+        headers: new Headers({"Content-type": "application/x-www-form-urlencoded;charset=UTF-8"}),
+        body: formData
+      }).then(function(res) {
+        location.reload()
+      })
+
     });
   }
 })
 
-// on click rename
-// 
+// Rename
+document.querySelectorAll('.core-media-infos__input').forEach(function(input) {
+  input.addEventListener('change', function(){
+    input.nextElementSibling.dataset.newname = input.value
+  })
+});
+document.querySelectorAll('.core-media-infos__save').forEach(function(button) {
+  button.addEventListener('click', function(e){
+    // put setTimeout 0
+    console.log(button.dataset);
+  })
+});
 
 </script>
