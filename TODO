@@ -1,5 +1,6 @@
-media screen
-  thumbnail
 blog screen
 plugin prototype
 plugin page
+
+BUGS:
+- can not upload big images, image is split in two and only first half is uploaded

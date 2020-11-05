@@ -1,6 +1,6 @@
 /* Resets */
 body, h1, h2, h3, h4, h5, p, ul, figure { margin: 0; padding: 0 }
-html, body, main, section, #section-wrapper { height: 100% }
+html, body, main, section, nav { height: 100%; }
 button, input { color: inherit; font-size: inherit; font-family: inherit; }
 
 /* Global fonctions */
@@ -22,7 +22,9 @@ main {
     display: table;
     table-layout: fixed;
     width: 100%;
+    overflow: hidden;
 }
+
 
 /* Header */
 header {
@@ -40,7 +42,6 @@ header {
 /* Nav */
 nav {
     width: 180px;
-    height: 100%;
     border-right: 1px solid #b3b3b3;
     display: table-cell;
     transition: width 0.45s ease-in-out;

@@ -4,3 +4,4 @@
 
 ## Frontend
 - icons: https://feathericons.com/
+- wysiwyg: https://editorjs.io/
