@@ -22,7 +22,7 @@ func main() {
 	engine := jet.New("./views", ".jet")
 	engine.Reload(true)
 
-	app := fiber.New(fiber.Config{Views: engine})
+	app := fiber.New(fiber.Config{Views: engine, BodyLimit: admin.BodyLimit})
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("admin/home", fiber.Map{"Title": "Home", "Navigation": admin.Navigation}, "layouts/main")
 	})

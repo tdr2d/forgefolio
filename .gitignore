@@ -31,3 +31,4 @@ pnpm-debug.log*
 
 # Core
 core/assets/media/
+core/assets/thumbnail/

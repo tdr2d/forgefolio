@@ -16,6 +16,7 @@ button, input { color: inherit; font-size: inherit; font-family: inherit; }
 body {
     font-family: "Work Sans",Arial,sans-serif;
     color: #222;
+    overflow: hidden;
 }
 main {
     display: table;

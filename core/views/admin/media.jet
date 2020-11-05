@@ -11,13 +11,13 @@
 <br>
 
 <div class="core-media-list">
-{{ range Files }}
+{{ range Medias }}
   <figure class="core-media-list__item">
-    <label class="core-media-list__item__image" for="checkbox-{{ .Name() }}" style="background-image: url({{ MediaDir}}/{{ .Name() }})"></label>
+    <label class="core-media-list__item__image" for="checkbox-{{ .Name }}" style="background-image: url({{ ThumnailDir }}/{{ .Name }}.jpg) ;"></label>
     <div class="core-media-infos">
-      <input id="checkbox-{{ .Name() }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name() }}">
-      <a href="{{ BaseUrl }}/{{ MediaDir}}/{{ .Name() }}" class="core-media-list__item-button feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
-      <input type=text class="core-media-infos__input core-input-text" value="" data-fullname="{{ .Name() }}" data-name="" data-ext="">
+      <input id="checkbox-{{ .Name }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name }}{{ .Ext }}">
+      <a href="{{ BaseUrl }}/{{ MediaDir}}/{{ .Name }}{{ .Ext }}" class="core-media-list__item-button feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
+      <input type=text class="core-media-infos__input core-input-text" value="{{ .Name }}" data-name="{{ .Name }}" data-ext="{{ .Ext }}">
       <button class="core-media-infos__save feather-small button-default" type="button">
         <i data-feather="save"></i>
       </button>
@@ -60,21 +60,15 @@ __core_media_deleteEl.addEventListener('click', function(){
 })
 
 // Rename
-document.querySelectorAll('.core-media-infos__input').forEach(function(input) {
-  const fullName = input.dataset.fullname;
-  input.dataset.name = fullName.substring(0, fullName.lastIndexOf('.'));
-  input.dataset.ext = fullName.substring(fullName.lastIndexOf('.') + 1);
-  input.value = input.dataset.name;
-});
 document.querySelectorAll('.core-media-infos__save').forEach(function(button) {
   button.addEventListener('click', function(e){
     var input = button.previousElementSibling;
-    fetch(document.location.origin + '/medias/' + input.dataset.fullname, {
+    fetch(document.location.origin + '/medias/' + input.dataset.name + input.dataset.ext, {
         method: 'PATCH',
         headers: new Headers({"Content-type": "application/x-www-form-urlencoded;charset=UTF-8"}),
-        body: 'new_name=' + encodeURIComponent(input.value + '.' + input.dataset.ext)
+        body: 'new_name=' + encodeURIComponent(input.value + input.dataset.ext)
       }).then(function(res) {
-        input.dataset.fullname = input.value + '.' + input.dataset.ext;
+        input.dataset.name = input.value;
         CoreNotificationNotify();
       });
   })

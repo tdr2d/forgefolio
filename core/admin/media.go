@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"core/utils"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -10,9 +11,10 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// MediaDir directory of medias
-const MediaDir string = "assets/media"
-const MediaThumbnailDir string = "assets/media/thumbnail"
+type mediaList struct {
+	Name string
+	Ext  string
+}
 
 // MediaController implement media crud operations
 func MediaController(app *fiber.App) {
@@ -21,12 +23,19 @@ func MediaController(app *fiber.App) {
 		if err != nil {
 			log.Error(err)
 		}
+		medias := make([]mediaList, len(files))
+		for i, file := range files {
+			_, name, ext := utils.GetDirNameExtension(file.Name())
+			medias[i].Name = name
+			medias[i].Ext = ext
+		}
 		data := fiber.Map{
-			"Title":      "Medias",
-			"Navigation": Navigation,
-			"Files":      files,
-			"MediaDir":   MediaDir,
-			"BaseUrl":    c.BaseURL(),
+			"Title":       "Medias",
+			"Navigation":  Navigation,
+			"Medias":      medias,
+			"MediaDir":    MediaDir,
+			"ThumnailDir": MediaThumbnailDir,
+			"BaseUrl":     c.BaseURL(),
 		}
 		return c.Render("admin/media", data, "layouts/main")
 	})
@@ -38,10 +47,14 @@ func MediaController(app *fiber.App) {
 		}
 		for _, file := range form.File["medias"] {
 			log.Info(file.Filename, string(file.Size), file.Header["Content-Type"][0])
-			err := c.SaveFile(file, fmt.Sprintf("%s/%s", MediaDir, file.Filename))
-
+			filepath := fmt.Sprintf("%s/%s", MediaDir, file.Filename)
+			err := c.SaveFile(file, filepath)
 			if err != nil {
+				log.Error(err)
 				return err
+			}
+			if _, err := utils.Thumbnail(filepath, 250, 0, MediaThumbnailDir); err != nil {
+				log.Error(err)
 			}
 		}
 		return c.Redirect("/medias")
@@ -60,15 +73,16 @@ func MediaController(app *fiber.App) {
 		medias := strings.Split(c.FormValue("medias"), ",")
 		log.Info("DELETE /medias ", medias)
 		for _, media := range medias {
-			if err := os.Remove(fmt.Sprintf("%s/%s", MediaDir, media)); err != nil {
+			filePath := fmt.Sprintf("%s/%s", MediaDir, media)
+			_, name, _ := utils.GetDirNameExtension(filePath)
+			thumbnailPath := fmt.Sprintf("%s/%s.jpg", MediaThumbnailDir, name)
+			if err := os.Remove(filePath); err != nil {
+				log.Error(err)
+			}
+			if err := os.Remove(thumbnailPath); err != nil {
 				log.Error(err)
 			}
 		}
 		return c.SendStatus(204)
 	})
 }
-
-// build thumbnail of check if
-// func getImageThumbnail(path string, sizeX int, sizeY int) string {
-// TODO thumbnail
-// }
