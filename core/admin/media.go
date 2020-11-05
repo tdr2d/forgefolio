@@ -2,11 +2,9 @@ package admin
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
-	"os/exec"
-	"strconv"
 	"strings"
-	"time"
 
 	fiber "github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"
@@ -14,21 +12,19 @@ import (
 
 // MediaDir directory of medias
 const MediaDir string = "assets/media"
-
-type mediaList struct {
-	Name      string
-	Size      string
-	UpdatedAt time.Time
-}
+const MediaThumbnailDir string = "assets/media/thumbnail"
 
 // MediaController implement media crud operations
 func MediaController(app *fiber.App) {
 	app.Get("/medias", func(c *fiber.Ctx) error {
-		medias := listMedia(MediaDir)
+		files, err := ioutil.ReadDir(MediaDir)
+		if err != nil {
+			log.Error(err)
+		}
 		data := fiber.Map{
 			"Title":      "Medias",
 			"Navigation": Navigation,
-			"Medias":     medias,
+			"Files":      files,
 			"MediaDir":   MediaDir,
 			"BaseUrl":    c.BaseURL(),
 		}
@@ -70,31 +66,6 @@ func MediaController(app *fiber.App) {
 		}
 		return c.SendStatus(204)
 	})
-}
-
-func listMedia(dir string) []mediaList {
-	cmd := exec.Command("ls", "-AgohcX", "--color=no", "--time-style=+%s", MediaDir)
-	stdouterr, err := cmd.CombinedOutput()
-	if err != nil {
-		log.Error("MediaController: cmd.Run() failed with ", err)
-		log.Error(string(stdouterr))
-		return nil
-	}
-
-	var data []mediaList = make([]mediaList, 0)
-	lines := strings.Split(string(stdouterr), "\n")
-	for _, line := range lines[1:] {
-		if line != "" && line[0] != 'd' {
-			tokens := strings.Split(line, " ")
-			dateInt, err := strconv.ParseInt(tokens[3], 10, 0)
-			if err != nil {
-				log.Error(err)
-			}
-			mediaListItem := mediaList{Size: tokens[2], UpdatedAt: time.Unix(dateInt, 0), Name: tokens[4]}
-			data = append(data, mediaListItem)
-		}
-	}
-	return data
 }
 
 // build thumbnail of check if

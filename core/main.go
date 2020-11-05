@@ -2,6 +2,7 @@ package main
 
 import (
 	"core/admin"
+	"core/utils"
 
 	fiber "github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
@@ -12,7 +13,8 @@ import (
 var port string = ":8080"
 
 func init() {
-	// configure logrus
+	utils.CheckDir(admin.MediaDir)
+	utils.CheckDir(admin.MediaThumbnailDir)
 	// log.SetReportCaller(true)
 }
 
