@@ -5,3 +5,7 @@
 ## Frontend
 - icons: https://feathericons.com/
 - wysiwyg: https://editorjs.io/
+
+
+## PLUGINS
+- compile javscript with esbuild https://esbuild.github.io/

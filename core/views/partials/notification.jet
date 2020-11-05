@@ -20,8 +20,8 @@
 .core-notification--transparent { opacity: 0 !important; }
 
 </style>
-<div id="core-notification" class="core-notification">Action successfull</div>
-
+<div id="core-notification" class="core-notification core-notification--hidden">Action successfull</div>
+  
 <script>
 var __core_notification = document.getElementById('core-notification');
 var __core_notification_locks = [];

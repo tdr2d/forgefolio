@@ -17,12 +17,14 @@ body {
     font-family: "Work Sans",Arial,sans-serif;
     color: #222;
     overflow: hidden;
+    position: relative;
 }
 main {
     display: table;
     table-layout: fixed;
     width: 100%;
     overflow: hidden;
+    position: relative;
 }
 
 

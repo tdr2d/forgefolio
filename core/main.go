@@ -5,7 +5,7 @@ import (
 	"core/utils"
 
 	fiber "github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/template/jet"
 	log "github.com/sirupsen/logrus"
 )
@@ -35,6 +35,10 @@ func main() {
 	})
 
 	app.Static("/assets/", "./assets")
-	app.Use(recover.New())
+	// app.Use(recover.New())
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowHeaders: "*",
+	}))
 	log.Fatal(app.Listen(port))
 }

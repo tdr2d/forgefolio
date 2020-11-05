@@ -66,6 +66,11 @@ func MediaController(app *fiber.App) {
 		if err := os.Rename(fmt.Sprintf("%s/%s", MediaDir, media), fmt.Sprintf("%s/%s", MediaDir, newName)); err != nil {
 			log.Error(err)
 		}
+		_, name, _ := utils.GetDirNameExtension(media)
+		_, newThumbName, _ := utils.GetDirNameExtension(newName)
+		if err := os.Rename(fmt.Sprintf("%s/%s.jpg", MediaThumbnailDir, name), fmt.Sprintf("%s/%s.jpg", MediaThumbnailDir, newThumbName)); err != nil {
+			log.Error(err)
+		}
 		return c.SendStatus(204)
 	})
 

@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-
+*.rdb
 
 # local env files
 .env.local
@@ -32,3 +32,6 @@ pnpm-debug.log*
 # Core
 core/assets/media/
 core/assets/thumbnail/
+
+# Plugins
+out.js

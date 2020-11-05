@@ -5,6 +5,6 @@ var editor = new EditorJS({
   /**
    * Id of Element that should contain Editor instance
    */
-  holder: 'wysiwyg'
+  holder: 'wysiwyg',
 });
 </script>
