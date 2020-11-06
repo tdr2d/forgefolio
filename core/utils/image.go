@@ -34,7 +34,7 @@ func Thumbnail(fromImagePath string, width uint, height uint, outputDir string) 
 			log.Error(fromImagePath, err)
 			return fromImagePath, err
 		}
-		thumbnailImage := resize.Resize(width, height, image, resize.NearestNeighbor)
+		thumbnailImage := resize.Resize(width, height, image, resize.Lanczos3)
 
 		// Write image
 		outputFile, err := os.Create(thumbnailPath)

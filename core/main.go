@@ -5,7 +5,6 @@ import (
 	"core/utils"
 
 	fiber "github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/template/jet"
 	log "github.com/sirupsen/logrus"
 )
@@ -15,6 +14,7 @@ var port string = ":8080"
 func init() {
 	utils.CheckDir(admin.MediaDir)
 	utils.CheckDir(admin.MediaThumbnailDir)
+	utils.CheckDir(admin.PluginDir)
 	// log.SetReportCaller(true)
 }
 
@@ -27,18 +27,18 @@ func main() {
 		return c.Render("admin/home", fiber.Map{"Title": "Home", "Navigation": admin.Navigation}, "layouts/main")
 	})
 	admin.MediaController(app)
+	admin.PluginController(app)
 	app.Get("/settings", func(c *fiber.Ctx) error {
-		return c.Render("admin/settings", fiber.Map{"Title": "Medias", "Navigation": admin.Navigation}, "layouts/main")
+		return c.Render("admin/settings", fiber.Map{"Title": "Settings", "Navigation": admin.Navigation}, "layouts/main")
 	})
 	app.Get("/blog-posts", func(c *fiber.Ctx) error {
-		return c.Render("admin/blog-posts", fiber.Map{"Title": "Blog Posts", "Navigation": admin.Navigation}, "layouts/main")
+		return c.Render("admin/blog-posts", fiber.Map{"PluginDir": admin.PluginDir, "Title": "Blog Posts", "Navigation": admin.Navigation}, "layouts/main")
 	})
 
 	app.Static("/assets/", "./assets")
 	// app.Use(recover.New())
-	app.Use(cors.New(cors.Config{
-		AllowOrigins: "*",
-		AllowHeaders: "*",
-	}))
+
+	// data, _ := json.MarshalIndent(app.Stack(), "", "  ")
+	// log.Info(string(data))
 	log.Fatal(app.Listen(port))
 }

@@ -1,6 +1,6 @@
 <header>
   <span id="logo-menu" class="header__sides"><i data-feather="menu"></i></span>
-  <div>{{ Title }}</div>
+  <h3>{{ Title }}</h3>
   <span class="header__sides"></span>
   <script>
   var nav = document.getElementById('nav-core')

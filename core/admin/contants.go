@@ -1,12 +1,13 @@
 package admin
 
+// Nav nav
 type Nav struct {
 	name string
 	link string
 	logo string // feather logo
 }
 
-// TODO load from database
+// Navigation TODO load from database
 var Navigation []Nav = []Nav{
 	{name: "Home", link: "/", logo: "home"},
 	{name: "Media", link: "/medias", logo: "image"},
@@ -22,3 +23,6 @@ const MediaThumbnailDir string = "assets/thumbnail"
 
 // BodyLimit max upload size
 const BodyLimit int = 4 * 1024 * 1024
+
+// PluginDir directory of plugins
+const PluginDir string = "plugins"

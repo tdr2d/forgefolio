@@ -1,3 +1,11 @@
 <h1>{{ Title }}</h1>
-<p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
 
+<div class="button-container">
+    <button class='button button--regular center'>Let's start</button>
+    
+    <button class='button button--dark center'>Touch me</button>
+    
+    <button class='button button--green center'>Just like that</button>
+    
+    <button class='button button--red center'>Now that I like</button>
+</div>

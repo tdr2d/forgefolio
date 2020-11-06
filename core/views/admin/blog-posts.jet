@@ -1,10 +1,5 @@
-<div id="wysiwyg"></div>
-<script src="assets/js/editor.js"></script>
-<script>
-var editor = new EditorJS({
-  /**
-   * Id of Element that should contain Editor instance
-   */
-  holder: 'wysiwyg',
-});
-</script>
+<style>
+</style>
+<div id="editorjs"></div>
+<button class="button button--regular button--rounded"><i data-feather="save"></i> Save</button>
+<script src="{{ PluginDir }}/blog-post/js/out.js"></script>

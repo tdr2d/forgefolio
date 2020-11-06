@@ -1,0 +1,15 @@
+{
+  "apiVersion": "beta/v1",
+  "pluginName": "blog-post",
+  "pluginDescription": "",
+  "featherIcon": "file-text",
+  "so": {
+    "path": "",
+    "symbols": []
+  },
+  "pluginOptions": {},
+  "assets": {
+    "js": ["js/out.js"]
+  },
+  "views": "views"
+}

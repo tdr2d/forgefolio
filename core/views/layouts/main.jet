@@ -1,24 +1,33 @@
 <html lang="en">
-  <head>
-    <title>{{ Title }}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/styles.css">
-  </head>
+<head>
+<title>{{ Title }}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* Variables */
+:root {
+  --color-dark: #222;
+  --color-blue: #416dea;
+  --color-green: #3dd28d;
+  --color-white: #FFFFFF;
+  --color-red: #F32C52;
+  --color-smoke: #e4e4e4;
+  --borderRadius: 36px;
+  --font-face: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+</style>
+<link rel="stylesheet" href="/assets/css/styles.css">
+</head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 {{ include "partials/modal" }}
 <main>
 {{ include "partials/nav" }}
 {{ include "partials/notification" }}
-<section>
 {{ include "partials/header" }}
 <article>
 {{ embed() }}
 </article>
-{{ include "partials/footer"}}
-</section>
 </main>
 <script>feather.replace()</script>
 </body>

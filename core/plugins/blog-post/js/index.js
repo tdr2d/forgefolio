@@ -3,8 +3,8 @@ import Header from '@editorjs/header';
 import List from '@editorjs/list'; 
 import ImageTool from '@editorjs/image';
 
-const backendUrl = "http://localhost:8080/medias"
-const backendAssetUrl = "http://localhost:8080/assets/media/"
+const backendUrl = "medias"
+const backendAssetUrl = "assets/media/"
 // const uploadHeaders = {
 //   "Content-Type": "multipart/form-data",
 // }
@@ -22,12 +22,11 @@ const editor = new EditorJS({
         uploader: {
           uploadByFile(file) {
             const formData  = new FormData();
-            formData.append("files", file);
-            console.log(file)
+            formData.append("medias", file);
             return fetch(backendUrl, {method: 'POST', body: formData}).then((res) => {
-              console.log(res);
               return {
-                file: { url: backendAssetUrl + file.name }
+                success: 1,
+                file: { url: location.origin + '/' + backendAssetUrl + file.name }
               };
             });
           }
@@ -37,7 +36,10 @@ const editor = new EditorJS({
   },
 })
 
-
+// .image-toool__caption
+// border: none;
+// text-align: center;
+// font-size: small;
 // editor.save().then((outputData) => {
 //     console.log('Article data: ', outputData)
 //   }).catch((error) => {

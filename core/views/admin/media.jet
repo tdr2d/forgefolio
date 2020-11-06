@@ -1,12 +1,19 @@
-<form class='row' method="POST" enctype="multipart/form-data">
-  <input type="file" name="medias" multiple>
-  <input type="submit">
+<form method="POST" enctype="multipart/form-data" action="/medias?redirect=true">
+  <div class="f fc">
+    <input id="input-file" type="file" name="medias" multiple hidden="hidden">
+    <button id="input-file-decoy" type="button" class="button button--regular"><i data-feather="upload"></i>Upload</button>
+  </div>
+  <div id="input-file-content" class="hidden">
+    <div></div>
+    <input type="submit" class="button button--rounded button--regular">
+  </div>
 </form>
-<hr>
 
-<div class="core-media-panel">
-  <span id="media-count">0</span> Selected
-  <button id="media-delete-button" class="core-media-list__item-button feather-small button-default" type="button"><i data-feather="trash"></i></button>
+<br>
+
+<div class="core-media-panel f fic">
+  <span id="media-count">0</span>&nbsp;Selected &nbsp;&nbsp;
+  <button id="media-delete-button" class="feather-small button button--red button--rounded button--small" type="button"><i data-feather="trash"></i></button>
 </div>
 <br>
 
@@ -16,17 +23,33 @@
     <label class="core-media-list__item__image" for="checkbox-{{ .Name }}" style="background-image: url({{ ThumnailDir }}/{{ .Name }}.jpg) ;"></label>
     <div class="core-media-infos">
       <input id="checkbox-{{ .Name }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name }}{{ .Ext }}">
-      <a href="{{ BaseUrl }}/{{ MediaDir}}/{{ .Name }}{{ .Ext }}" class="core-media-list__item-button feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
+      <a href="{{ BaseUrl }}/{{ MediaDir}}/{{ .Name }}{{ .Ext }}" class="feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
       <input type=text class="core-media-infos__input core-input-text" value="{{ .Name }}" data-name="{{ .Name }}" data-ext="{{ .Ext }}">
-      <button class="core-media-infos__save feather-small button-default" type="button">
-        <i data-feather="save"></i>
-      </button>
+      <button class="core-media-infos__save feather-small button-default" type="button"><i data-feather="save"></i></button>
     </div>
   </figure>
 {{ end }}
 </div>
 
 <script>
+// Input file
+var __input_file = document.getElementById('input-file');
+var __input_file_decoy = document.getElementById('input-file-decoy');
+var __input_file_content = document.getElementById('input-file-content');
+__input_file_decoy.addEventListener("click", function() { __input_file.click(); });
+__input_file.addEventListener("change", function() {
+  if (__input_file.value) {
+    __input_file_content.classList.toggle('hidden');
+    console.log(__input_file.files.forEach());
+    console.log(__input_file.value);
+    console.log(__input_file.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1])
+  } else {
+    __input_file_content.classList.toggle('hidden');
+    console.log('input file empty');
+    //customTxt.innerHTML = "No file chosen, yet.";
+  }
+});
+
 var __core_media_checked = new Set();
 var __core_media_countEl = document.getElementById('media-count');
 var __core_media_deleteEl = document.getElementById('media-delete-button');

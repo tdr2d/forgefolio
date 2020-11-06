@@ -57,7 +57,10 @@ func MediaController(app *fiber.App) {
 				log.Error(err)
 			}
 		}
-		return c.Redirect("/medias")
+		if c.Query("redirect") != "" {
+			return c.Redirect("/medias")
+		}
+		return c.SendStatus(201)
 	})
 
 	app.Patch("/medias/:name", func(c *fiber.Ctx) error {

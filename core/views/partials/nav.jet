@@ -1,7 +1,22 @@
+<style>
+nav {
+	width: 180px;
+	box-shadow: 1px 0px 9px 0px rgba(0,0,0,0.15);
+	display: table-cell;
+	transition: width 0.45s ease-in-out;
+	white-space: nowrap;
+	overflow: hidden;
+	float: left;
+}
+.nav--collapsed { width: 0px; }
+#nav-core a {
+  width: 180px;
+} 
+</style>
 <nav id="nav-core" class="">
   <dl>
     {{ range Navigation }}
-      <dt><a href="{{ .link }}"><i data-feather="{{ .logo }}"></i>{{ .name }}</a></li>
+      <dt><a class="button button--regular block" href="{{ .link }}"><i data-feather="{{ .logo }}"></i>&nbsp;{{ .name }}</a></li>
     {{ end }}
   </ul>
 </nav>

@@ -1,6 +1,10 @@
 blog screen
 plugin prototype
 plugin page
+theme plugin prototype
+theme page
+setting screen
 
 BUGS:
 - can not upload big images, image is split in two and only first half is uploaded
+- CORS issues with fiber
