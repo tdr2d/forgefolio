@@ -14,7 +14,7 @@ var port string = ":8080"
 func init() {
 	utils.CheckDir(admin.MediaDir)
 	utils.CheckDir(admin.MediaThumbnailDir)
-	utils.CheckDir(admin.PluginDir)
+	utils.CheckDir(admin.BlogDataDir)
 	// log.SetReportCaller(true)
 }
 
@@ -27,17 +27,14 @@ func main() {
 		return c.Render("admin/home", fiber.Map{"Title": "Home", "Navigation": admin.Navigation}, "layouts/main")
 	})
 	admin.MediaController(app)
-	admin.PluginController(app)
+	// admin.PluginController(app)
+	admin.BlogController(app)
 	app.Get("/settings", func(c *fiber.Ctx) error {
 		return c.Render("admin/settings", fiber.Map{"Title": "Settings", "Navigation": admin.Navigation}, "layouts/main")
-	})
-	app.Get("/blog-posts", func(c *fiber.Ctx) error {
-		return c.Render("admin/blog-posts", fiber.Map{"PluginDir": admin.PluginDir, "Title": "Blog Posts", "Navigation": admin.Navigation}, "layouts/main")
 	})
 
 	app.Static("/assets/", "./assets")
 	// app.Use(recover.New())
-
 	// data, _ := json.MarshalIndent(app.Stack(), "", "  ")
 	// log.Info(string(data))
 	log.Fatal(app.Listen(port))

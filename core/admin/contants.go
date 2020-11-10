@@ -24,5 +24,5 @@ const MediaThumbnailDir string = "assets/thumbnail"
 // BodyLimit max upload size
 const BodyLimit int = 4 * 1024 * 1024
 
-// PluginDir directory of plugins
-const PluginDir string = "plugins"
+// BlogDataDir is the dir containing the data of the blog posts
+const BlogDataDir string = "assets/blogdata"

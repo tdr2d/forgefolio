@@ -8,10 +8,21 @@ h1.ce-header {
 
 </style>
 <div id="editorjs"></div>
-<button id="save-button" id="output" class="button button--regular button--rounded" style="margin-top: -200px;">
-  <i data-feather="save"></i> Save
-</button>
+
+<div class="f fc" style="">
+  <button id="save-button" id="output" class="button button--green button--rounded">
+    <i data-feather="save"></i> Save
+  </button>
+
+
+</div>
 <pre id="output"></pre>
 
-<script src="{{ PluginDir }}/blog-post/js/out.js"></script>
-
+<script src="assets/js/blog/compiled.js"></script>
+<script>
+window.onbeforeunload = function() {
+   return "Do you really want to leave our brilliant application?";
+   //if we return nothing here (just calling return;) then there will be no pop-up question at all
+   //return;
+};
+</script>

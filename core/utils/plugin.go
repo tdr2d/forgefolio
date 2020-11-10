@@ -6,5 +6,3 @@ type Plugin struct {
 	descriptor  string
 	featherIcon string
 }
-
-// grab app and add a
