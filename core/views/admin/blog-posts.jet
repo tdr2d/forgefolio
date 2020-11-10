@@ -1,5 +1,17 @@
 <style>
+/* Header */
+h1.ce-header {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
 </style>
 <div id="editorjs"></div>
-<button class="button button--regular button--rounded"><i data-feather="save"></i> Save</button>
+<button id="save-button" id="output" class="button button--regular button--rounded" style="margin-top: -200px;">
+  <i data-feather="save"></i> Save
+</button>
+<pre id="output"></pre>
+
 <script src="{{ PluginDir }}/blog-post/js/out.js"></script>
+

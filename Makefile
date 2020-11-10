@@ -1,7 +1,7 @@
-install_node_ubuntu:
-	curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
-	sudo apt-get install -y nodejs npm
+.PHONY: core redis tests
 
+core:
+	cd core && go run .
 
-install_node_mac:
-	brew install node
+corejs:
+	cd core/assets/js/ && npm run build

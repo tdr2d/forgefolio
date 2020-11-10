@@ -15,7 +15,6 @@ const editor = new EditorJS({
 
   tools: {
     header: Header,
-    list: List,
     image: {
       class: ImageTool,
       config: {
@@ -35,6 +34,15 @@ const editor = new EditorJS({
     }
   },
 })
+
+const saveButton = document.getElementById('save-button');
+const output = document.getElementById('output');
+saveButton.addEventListener('click', () => {
+  editor.save().then( savedData => {
+    output.innerHTML = JSON.stringify(savedData, null, 4);
+  })
+})
+
 
 // .image-toool__caption
 // border: none;

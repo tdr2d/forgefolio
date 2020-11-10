@@ -3,7 +3,6 @@
 - Jet templates: https://github.com/CloudyKit/jet/blob/master/docs/syntax.md
 - icons: https://feathericons.com/
 
-
 ## PLUGINS
 - compile javscript with esbuild https://esbuild.github.io/
 
