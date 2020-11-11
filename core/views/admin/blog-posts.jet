@@ -10,10 +10,10 @@ h1.ce-header {
 <div id="editorjs"></div>
 
 <div class="f fc" style="">
-  <button id="save-button" id="output" class="button button--green button--rounded">
+
+  <button id="save-button" class="button button--green button--rounded">
     <i data-feather="save"></i> Save
   </button>
-
 
 </div>
 <pre id="output"></pre>

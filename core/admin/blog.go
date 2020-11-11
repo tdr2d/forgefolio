@@ -4,7 +4,9 @@ import fiber "github.com/gofiber/fiber/v2"
 
 // BlogPost is the structure of the post
 type BlogPost struct {
-	id int
+	id      int
+	name    string
+	content string
 }
 
 // BlogController implement blog crud operations
