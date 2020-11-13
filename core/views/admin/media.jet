@@ -1,12 +1,9 @@
-<form method="POST" enctype="multipart/form-data" action="/medias?redirect=true">
+<form method="POST" enctype="multipart/form-data" action="/admin/medias?redirect=true">
   <div class="f fc">
     <input id="input-file" type="file" name="medias" multiple hidden="hidden">
     <button id="input-file-decoy" type="button" class="button button--blue"><i data-feather="upload"></i>Upload</button>
   </div>
-  <div id="input-file-content" class="hidden">
-    <div></div>
-    <input type="submit" class="button button--rounded button--regular">
-  </div>
+  <input type="submit" class="button button--rounded button--regular hidden" hidden="hidden">
 </form>
 
 <br>
@@ -18,35 +15,27 @@
 <br>
 
 <div class="core-media-list">
-{{ range Medias }}
+  {{ range Medias }}
   <figure class="core-media-list__item">
-    <label class="core-media-list__item__image" for="checkbox-{{ .Name }}" style="background-image: url({{ ThumnailDir }}/{{ .Name }}.jpg) ;"></label>
-    <div class="core-media-infos">
+    <label class="core-media-list__item__image" for="checkbox-{{ .Name }}" style="background-image: url(/{{ Constants.MediaThumbnailDir }}/{{ .Name }}.jpg) ;"></label>
+    <div class="core-media-infos f fsb">
       <input id="checkbox-{{ .Name }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name }}{{ .Ext }}">
-      <a href="{{ BaseUrl }}/{{ MediaDir}}/{{ .Name }}{{ .Ext }}" class="feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
-      <input type=text class="core-media-infos__input core-input-text" value="{{ .Name }}" data-name="{{ .Name }}" data-ext="{{ .Ext }}">
+      <a href="/{{ Constants.MediaDir }}/{{ .Name }}{{ .Ext }}" class="feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
+      <input type=text class="core-media-infos__input core-input-text fg" value="{{ .Name }}" data-name="{{ .Name }}" data-ext="{{ .Ext }}">
       <button class="core-media-infos__save feather-small button-default" type="button"><i data-feather="save"></i></button>
     </div>
   </figure>
-{{ end }}
+  {{ end }}
 </div>
 
 <script>
 // Input file
 var __input_file = document.getElementById('input-file');
 var __input_file_decoy = document.getElementById('input-file-decoy');
-var __input_file_content = document.getElementById('input-file-content');
 __input_file_decoy.addEventListener("click", function() { __input_file.click(); });
 __input_file.addEventListener("change", function() {
   if (__input_file.value) {
-    __input_file_content.classList.toggle('hidden');
-    console.log(__input_file.files.forEach());
-    console.log(__input_file.value);
-    console.log(__input_file.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1])
-  } else {
-    __input_file_content.classList.toggle('hidden');
-    console.log('input file empty');
-    //customTxt.innerHTML = "No file chosen, yet.";
+    __input_file.form.submit();  
   }
 });
 
@@ -70,7 +59,7 @@ document.querySelectorAll('.core-media-checkbox').forEach(function(checkbox){
 __core_media_deleteEl.addEventListener('click', function(){
   if (__core_media_checked.size > 0) {
     OpenCoreModalConfirm("Confirm deletion ?", function(){
-      fetch(document.location.origin + '/medias', {
+      fetch(document.location.origin + BASE_URL + '/medias', {
         method: 'DELETE',
         headers: new Headers({"Content-type": "application/x-www-form-urlencoded;charset=UTF-8"}),
         body: 'medias=' + encodeURIComponent(Array.from(__core_media_checked).join(','))
@@ -86,7 +75,7 @@ __core_media_deleteEl.addEventListener('click', function(){
 document.querySelectorAll('.core-media-infos__save').forEach(function(button) {
   button.addEventListener('click', function(e){
     var input = button.previousElementSibling;
-    fetch(document.location.origin + '/medias/' + input.dataset.name + input.dataset.ext, {
+    fetch(document.location.origin + BASE_URL + '/medias/' + input.dataset.name + input.dataset.ext, {
         method: 'PATCH',
         headers: new Headers({"Content-type": "application/x-www-form-urlencoded;charset=UTF-8"}),
         body: 'new_name=' + encodeURIComponent(input.value + input.dataset.ext)

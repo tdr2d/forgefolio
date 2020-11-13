@@ -9,14 +9,17 @@ nav {
 	float: left;
 }
 .nav--collapsed { width: 0px; }
-#nav-core a {
-  width: 180px;
-} 
+.nav-separator {
+	margin: 18px 0;
+}
 </style>
 <nav id="nav-core" class="">
   <dl>
-    {{ range Navigation }}
-      <dt><a class="button button--regular block" href="{{ .link }}"><i data-feather="{{ .logo }}"></i>&nbsp;{{ .name }}</a></li>
+    {{ range Constants.Navigation }}
+      <dt>{{ if .name == ""}}<div class="nav-separator"></div>{{ else }}
+	  	<a class="button button--regular" href="{{ .link }}"><i data-feather="{{ .logo }}"></i>&nbsp;{{ .name }}</a>
+		  {{ end }}
+		</dt>
     {{ end }}
-  </ul>
+  </dl>
 </nav>

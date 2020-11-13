@@ -6,7 +6,7 @@
 <style>
   /* Variables */
 :root {
-  --color-dark: #222;
+  --color-dark: #3b3b3b;
   --color-blue: #416dea;
   --color-green: #3dd28d;
   --color-white: #FFFFFF;
@@ -20,6 +20,7 @@
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>var BASE_URL="/admin";</script>
 {{ include "partials/modal" }}
 <main>
 {{ include "partials/nav" }}
@@ -29,6 +30,9 @@
 {{ embed() }}
 </article>
 </main>
-<script>feather.replace()</script>
+<script>
+  feather.replace();
+  console.log('here');
+</script>
 </body>
 </html>

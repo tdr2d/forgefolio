@@ -3,8 +3,9 @@ import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
 import {getInitialData} from './initialData';
 
-const backendUrl = "medias"
-const backendAssetUrl = "assets/media/"
+const backendUrl = "medias";
+const backendAssetUrl = "assets/media/";
+const baseUrl = "/admin";
 const editor = new EditorJS({ 
   holder: 'editorjs',
   data: IS_NEW ? getInitialData() : POST,
@@ -44,7 +45,7 @@ function findTitle(editorJsData) {
 
 function postBlogPost(body) {
   const method = IS_NEW ? 'POST' : 'PATCH';
-  const url = IS_NEW ? '/blog-posts' : `/blog-posts/${POST.id}`;
+  const url = IS_NEW ? `${baseUrl}/blog-posts` : `${baseUrl}/blog-posts/${POST.id}`;
   return fetch(url, {method: method, headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)})
 }
 
@@ -69,9 +70,9 @@ document.getElementById('save-button').addEventListener('click', () => {
       console.error(err)
     } else {
       if (!IS_NEW) {
-        window.location.href = `/blog-posts/${body.id}`;
+        window.location.href = `${baseUrl}/blog-posts/${body.id}?notification=${encodeURIComponent("Post updated")}`;
       } else {
-        window.location.href = `/blog-posts?create=true`;
+        window.location.href = `${baseUrl}/blog-posts?notification=${encodeURIComponent("New post created")}`;
       }
     }
   })

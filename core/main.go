@@ -5,6 +5,8 @@ import (
 	"core/utils"
 
 	fiber "github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/template/jet"
 	log "github.com/sirupsen/logrus"
 )
@@ -12,28 +14,29 @@ import (
 var port string = ":8080"
 
 func init() {
-	utils.CheckDir(admin.MediaDir)
-	utils.CheckDir(admin.MediaThumbnailDir)
-	utils.CheckDir(admin.BlogDataDir)
+	utils.CheckDir(admin.Constants.MediaDir)
+	utils.CheckDir(admin.Constants.MediaThumbnailDir)
+	utils.CheckDir(admin.Constants.BlogDataDir)
 	// log.SetReportCaller(true)
 }
 
 func main() {
 	engine := jet.New("./views", ".jet")
 	engine.Reload(true)
+	app := fiber.New(fiber.Config{Views: engine, BodyLimit: admin.Constants.BodyLimit})
+	app.Use(logger.New())
+	app.Use(recover.New())
 
-	app := fiber.New(fiber.Config{Views: engine, BodyLimit: admin.BodyLimit})
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Render("admin/home", fiber.Map{"Title": "Home", "Navigation": admin.Navigation}, "layouts/main")
+	adminApiGroup := app.Group("/admin")
+	adminApiGroup.Get("/", func(c *fiber.Ctx) error {
+		return c.Render("admin/home", fiber.Map{"Title": "Home", "Constants": admin.Constants}, "layouts/main")
 	})
-	admin.MediaController(app)
-	admin.BlogController(app)
-	app.Get("/settings", func(c *fiber.Ctx) error {
-		return c.Render("admin/settings", fiber.Map{"Title": "Settings", "Navigation": admin.Navigation}, "layouts/main")
+	admin.MediaController(adminApiGroup)
+	admin.BlogController(adminApiGroup)
+	adminApiGroup.Get("/settings", func(c *fiber.Ctx) error {
+		return c.Render("admin/settings", fiber.Map{"Title": "Settings", "Constants": admin.Constants}, "layouts/main")
 	})
-
 	app.Static("/assets/", "./assets")
-	// app.Use(recover.New())
 	// data, _ := json.MarshalIndent(app.Stack(), "", "  ")
 	// log.Info(string(data))
 	log.Fatal(app.Listen(port))

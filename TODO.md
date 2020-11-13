@@ -2,6 +2,7 @@
 ## blog features
 - apply theme
 - display pages
+- media copy clipboard + add image by url
 
 ## Theme
 theme plugin prototype
@@ -15,7 +16,9 @@ plugin prototype
 plugin page
 setting screen
 handle errors with javascript
+notifications
 e2e tests
+tls support
 
 # BUGS
 - can not upload big images, image is split in two and only first half is uploaded

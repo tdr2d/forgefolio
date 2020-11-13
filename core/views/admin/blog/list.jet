@@ -13,7 +13,7 @@
 <table class="core-blog-list">
 {{ range Posts }}
 <tr class="core-blog-row">
-    <td><a href="/blog-posts/{{ .Path }}">{{ .Name }}</a> </td>
+    <td><a href="/admin/blog-posts/{{ .Path }}">{{ .Name }}</a> </td>
     <td>Date: <span>{{ .Date }}</span></td>
     <td class="f fc">
         <button class="core-blog-row__delete button button--red button--rounded feather-small" data-id="{{ .Path }}"><i data-feather="trash"></i></button>
@@ -25,10 +25,9 @@
 
 document.querySelectorAll('.core-blog-row__delete').forEach(function(button){
     button.onclick = function() {
-        console.log(button.dataset.id);
         OpenCoreModalConfirm(null, function(){
-            fetch(`/blog-posts/${button.dataset.id}`, {method: "DELETE"}).then(function(res){
-                window.location.href = `/blog-posts?updated=${new Date().getTime()}`;
+            fetch(BASE_URL + '/blog-posts/' + button.dataset.id, {method: "DELETE"}).then(function(res){
+                window.location.href = BASE_URL + '/blog-posts?updated=' + new Date().getTime();
             })
         })
     }

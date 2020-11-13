@@ -7,22 +7,28 @@ type Nav struct {
 	logo string // feather logo
 }
 
-// Navigation TODO load from database
-var Navigation []Nav = []Nav{
-	{name: "Home", link: "/", logo: "home"},
-	{name: "Media", link: "/medias", logo: "image"},
-	{name: "Settings", link: "/settings", logo: "settings"},
-	{name: "Blog Posts", link: "/blog-posts", logo: "file-text"},
+// Constant represent constant variables used in jet templates
+type Constant struct {
+	MediaDir          string
+	MediaThumbnailDir string
+	BlogDataDir       string
+	PageDataDir       string
+	BodyLimit         int
+	Navigation        []Nav
 }
 
-// MediaDir directory of medias
-const MediaDir string = "assets/media"
-
-// MediaThumbnailDir directory of media thumbnails
-const MediaThumbnailDir string = "assets/thumbnail"
-
-// BodyLimit max upload size
-const BodyLimit int = 4 * 1024 * 1024
-
-// BlogDataDir is the dir containing the data of the blog posts
-const BlogDataDir string = "assets/blogdata"
+var Constants Constant = Constant{
+	MediaDir:          "assets/media",
+	MediaThumbnailDir: "assets/thumbnail",
+	BlogDataDir:       "assets/blogdata",
+	PageDataDir:       "assets/pagedata",
+	BodyLimit:         4 * 1024 * 1024,
+	Navigation: []Nav{
+		{name: "Home", link: "/admin", logo: "home"},
+		{name: "Media", link: "/admin/medias", logo: "image"},
+		{name: "Settings", link: "/admin/settings", logo: "settings"},
+		{name: ""},
+		{name: "Blog Posts", link: "/admin/blog-posts", logo: "file-text"},
+		{name: "Pages", link: "/admin/pages", logo: "layout"},
+	},
+}

@@ -13,9 +13,11 @@ table { width: 100%; border-collapse: collapse; }
 .button-default { border: none; background: none; }
 .hidden {display: none !important }
 
-.f {display: flex; }
-.fc {justify-content: center; }
-.fic { align-items: center; }
+.f   { display: flex }
+.fc  { justify-content: center }
+.fsb { justify-content: space-between }
+.fic { align-items: center }
+.fg  { flex-grow: 1 }
 
 /* Button */
 .button {

@@ -17,9 +17,9 @@ type mediaList struct {
 }
 
 // MediaController implement media crud operations
-func MediaController(app *fiber.App) {
+func MediaController(app fiber.Router) {
 	app.Get("/medias", func(c *fiber.Ctx) error {
-		files, err := ioutil.ReadDir(MediaDir)
+		files, err := ioutil.ReadDir(Constants.MediaDir)
 		if err != nil {
 			log.Error(err)
 		}
@@ -30,12 +30,9 @@ func MediaController(app *fiber.App) {
 			medias[i].Ext = ext
 		}
 		data := fiber.Map{
-			"Title":       "Medias",
-			"Navigation":  Navigation,
-			"Medias":      medias,
-			"MediaDir":    MediaDir,
-			"ThumnailDir": MediaThumbnailDir,
-			"BaseUrl":     c.BaseURL(),
+			"Title":     "Medias",
+			"Constants": Constants,
+			"Medias":    medias,
 		}
 		return c.Render("admin/media", data, "layouts/main")
 	})
@@ -43,22 +40,22 @@ func MediaController(app *fiber.App) {
 	app.Post("/medias", func(c *fiber.Ctx) error {
 		form, err := c.MultipartForm()
 		if err != nil {
-			return err
+			panic(err)
 		}
 		for _, file := range form.File["medias"] {
 			log.Info(file.Filename, string(file.Size), file.Header["Content-Type"][0])
-			filepath := fmt.Sprintf("%s/%s", MediaDir, file.Filename)
+			filepath := fmt.Sprintf("%s/%s", Constants.MediaDir, file.Filename)
 			err := c.SaveFile(file, filepath)
 			if err != nil {
 				log.Error(err)
 				return err
 			}
-			if _, err := utils.Thumbnail(filepath, 250, 0, MediaThumbnailDir); err != nil {
+			if _, err := utils.Thumbnail(filepath, 250, 0, Constants.MediaThumbnailDir); err != nil {
 				log.Error(err)
 			}
 		}
 		if c.Query("redirect") != "" {
-			return c.Redirect("/medias")
+			return c.Redirect("/admin/medias")
 		}
 		return c.SendStatus(201)
 	})
@@ -66,12 +63,12 @@ func MediaController(app *fiber.App) {
 	app.Patch("/medias/:name", func(c *fiber.Ctx) error {
 		media := c.Params("name")
 		newName := c.FormValue("new_name")
-		if err := os.Rename(fmt.Sprintf("%s/%s", MediaDir, media), fmt.Sprintf("%s/%s", MediaDir, newName)); err != nil {
+		if err := os.Rename(fmt.Sprintf("%s/%s", Constants.MediaDir, media), fmt.Sprintf("%s/%s", Constants.MediaDir, newName)); err != nil {
 			log.Error(err)
 		}
 		_, name, _ := utils.GetDirNameExtension(media)
 		_, newThumbName, _ := utils.GetDirNameExtension(newName)
-		if err := os.Rename(fmt.Sprintf("%s/%s.jpg", MediaThumbnailDir, name), fmt.Sprintf("%s/%s.jpg", MediaThumbnailDir, newThumbName)); err != nil {
+		if err := os.Rename(fmt.Sprintf("%s/%s.jpg", Constants.MediaThumbnailDir, name), fmt.Sprintf("%s/%s.jpg", Constants.MediaThumbnailDir, newThumbName)); err != nil {
 			log.Error(err)
 		}
 		return c.SendStatus(204)
@@ -81,9 +78,9 @@ func MediaController(app *fiber.App) {
 		medias := strings.Split(c.FormValue("medias"), ",")
 		log.Info("DELETE /medias ", medias)
 		for _, media := range medias {
-			filePath := fmt.Sprintf("%s/%s", MediaDir, media)
+			filePath := fmt.Sprintf("%s/%s", Constants.MediaDir, media)
 			_, name, _ := utils.GetDirNameExtension(filePath)
-			thumbnailPath := fmt.Sprintf("%s/%s.jpg", MediaThumbnailDir, name)
+			thumbnailPath := fmt.Sprintf("%s/%s.jpg", Constants.MediaThumbnailDir, name)
 			if err := os.Remove(filePath); err != nil {
 				log.Error(err)
 			}
