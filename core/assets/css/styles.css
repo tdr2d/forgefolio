@@ -4,6 +4,7 @@ html, body, main, nav { height: 100%; }
 button, input { color: inherit; font-size: inherit; font-family: inherit; }
 a, a:visited { text-decoration: none; color: inherit; }
 a:hover, a:visited:hover { text-decoration: underline; color: var(--color-blue); }
+table { width: 100%; border-collapse: collapse; }
 
 /* Global fonctions */
 .ellipsis { text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
@@ -18,8 +19,8 @@ a:hover, a:visited:hover { text-decoration: underline; color: var(--color-blue);
 
 /* Button */
 .button {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
   overflow: hidden;
   padding: 12px 12px;
   cursor: pointer;
@@ -28,8 +29,8 @@ a:hover, a:visited:hover { text-decoration: underline; color: var(--color-blue);
   font-size: 13px;
   font-weight: 500;
 	line-height: 1.3;
-	transition: box-shadow 0.150s linear;
-	will-change: box-shadow;
+	transition: opacity 0.200s linear;
+	will-change: opacity;
   box-shadow: 2px 2px 5px var(--color-smoke); 
 }
 .button--small { padding: 5px; font-size: small;}
@@ -41,6 +42,7 @@ a:hover, a:visited:hover { text-decoration: underline; color: var(--color-blue);
 .button--rounded {border-radius: var(--borderRadius);}
 .button--regular { color: var(--color-dark); background-color: #fff; }
 .button--dark { color: var(--color-white); background: var(--color-dark); }
+.button--blue { color: var(--color-white) !important; background: var(--color-blue); }
 .button--green { color: var(--color-white); background: var(--color-green); }
 .button--red { color: var(--color-white); background: var(--color-red); }
 

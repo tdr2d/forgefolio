@@ -44,8 +44,8 @@ function findTitle(editorJsData) {
 
 function postBlogPost(body) {
   const method = IS_NEW ? 'POST' : 'PATCH';
-  const url = IS_NEW ? '/blog-posts' : '/blog-posts';
-  return fetch(url, {method: method, headers: {'Content-Type': 'application/json'}, body: body})
+  const url = IS_NEW ? '/blog-posts' : `/blog-posts/${POST.id}`;
+  return fetch(url, {method: method, headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)})
 }
 
 document.getElementById('save-button').addEventListener('click', () => {
@@ -55,20 +55,24 @@ document.getElementById('save-button').addEventListener('click', () => {
     if (!title) {
       return Promise.reject("Wrong title");
     }
-    body = JSON.stringify({
+    body = {
       id: `BP__${Number.MAX_SAFE_INTEGER - editorJsData.time}__${title}`,
       time: editorJsData.time,
       version: editorJsData.version,
       blocks: JSON.stringify(editorJsData.blocks)
-    });
+    };
     document.getElementById('output').innerHTML = JSON.stringify(editorJsData, null, 4);
-    return postBlogPost(body)
+    return postBlogPost(body).then(() => Promise.resolve(body))
   })
-  .then((res, err) => {
+  .then((body, err) => {
     if (err) {
       console.error(err)
     } else {
-      console.log(res);
+      if (!IS_NEW) {
+        window.location.href = `/blog-posts/${body.id}`;
+      } else {
+        window.location.href = `/blog-posts?create=true`;
+      }
     }
   })
 })

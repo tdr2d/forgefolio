@@ -22,7 +22,7 @@ h1.ce-header {
   </button>
 </div>
 
-<pre id="output" class=""></pre>
+<pre id="output" class="hidden"></pre>
 <script>
 {{ if IsNew }}
 var IS_NEW=true;
@@ -30,12 +30,12 @@ var POST=null;
 {{ else }}
 var IS_NEW=false;
 var POST={
+  id: "{{ Post.Id }}",
   version: "{{ Post.Version }}",
   time: {{ Post.Time }},
   blocks: JSON.parse('{{ Post.Blocks | raw }}'),
 };
 {{ end }}
-console.log(POST);
 </script>
 <script src="/assets/js/blog/compiled.js"></script>
 <script>

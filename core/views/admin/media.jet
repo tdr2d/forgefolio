@@ -1,7 +1,7 @@
 <form method="POST" enctype="multipart/form-data" action="/medias?redirect=true">
   <div class="f fc">
     <input id="input-file" type="file" name="medias" multiple hidden="hidden">
-    <button id="input-file-decoy" type="button" class="button button--regular"><i data-feather="upload"></i>Upload</button>
+    <button id="input-file-decoy" type="button" class="button button--blue"><i data-feather="upload"></i>Upload</button>
   </div>
   <div id="input-file-content" class="hidden">
     <div></div>

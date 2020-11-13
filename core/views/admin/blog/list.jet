@@ -1,15 +1,37 @@
+<style>
+.core-blog-row {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+</style>
 <div class="f fc">
-<a href="blog-posts/new" class="button button--regular"> <i data-feather="plus"></i>Create a new post </a>
+<a href="blog-posts/new" class="button button--blue"> <i data-feather="plus"></i>Create a new post </a>
 </div>
 
 <br>
 
-<ul class="core-blog-list">
+<table class="core-blog-list">
 {{ range Posts }}
-<li class="core-blog-item">
-    <a href="/blog-posts/{{ .Path }}">{{ .Name }}</a> 
-    <span></span>
-    <span></span>
-</li>
+<tr class="core-blog-row">
+    <td><a href="/blog-posts/{{ .Path }}">{{ .Name }}</a> </td>
+    <td>Date: <span>{{ .Date }}</span></td>
+    <td class="f fc">
+        <button class="core-blog-row__delete button button--red button--rounded feather-small" data-id="{{ .Path }}"><i data-feather="trash"></i></button>
+    </td>
+</tr>
 {{ end }}
-</ul>
+</table>
+<script>
+
+document.querySelectorAll('.core-blog-row__delete').forEach(function(button){
+    button.onclick = function() {
+        console.log(button.dataset.id);
+        OpenCoreModalConfirm(null, function(){
+            fetch(`/blog-posts/${button.dataset.id}`, {method: "DELETE"}).then(function(res){
+                window.location.href = `/blog-posts?updated=${new Date().getTime()}`;
+            })
+        })
+    }
+})
+
+</script>

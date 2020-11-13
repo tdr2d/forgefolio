@@ -4,6 +4,7 @@ import (
 	"core/utils"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"regexp"
 	"strings"
 
@@ -22,6 +23,7 @@ type BlogPost struct {
 type BlogPostList struct {
 	Name string
 	Path string
+	Date string
 }
 
 func nameFromId(id string) string {
@@ -50,6 +52,7 @@ func BlogController(app *fiber.App) {
 		for i, item := range files {
 			posts[i].Name = nameFromId(item.Name())
 			posts[i].Path = item.Name()
+			posts[i].Date = item.ModTime().Format("2006-01-02 15:04:05")
 		}
 		if err != nil {
 			log.Error(err)
@@ -64,6 +67,33 @@ func BlogController(app *fiber.App) {
 			return err
 		}
 		if err := utils.PersistStruct(bp, fmt.Sprintf("%s/%s", BlogDataDir, bp.Id)); err != nil {
+			log.Error(err)
+			return err
+		}
+		return c.SendStatus(200)
+	})
+
+	app.Patch("blog-posts/:id", func(c *fiber.Ctx) error {
+		oldId := c.Params("id")
+		bp := new(BlogPost)
+		if err := c.BodyParser(bp); err != nil {
+			log.Error(err)
+			return err
+		}
+		if err := os.Rename(fmt.Sprintf("%s/%s", BlogDataDir, oldId), fmt.Sprintf("%s/%s", BlogDataDir, bp.Id)); err != nil {
+			log.Error(err)
+			return err
+		}
+		if err := utils.PersistStruct(bp, fmt.Sprintf("%s/%s", BlogDataDir, bp.Id)); err != nil {
+			log.Error(err)
+			return err
+		}
+		return c.SendStatus(200)
+	})
+
+	app.Delete("blog-posts/:id", func(c *fiber.Ctx) error {
+		id := c.Params("id")
+		if err := os.Remove(fmt.Sprintf("%s/%s", BlogDataDir, id)); err != nil {
 			log.Error(err)
 			return err
 		}

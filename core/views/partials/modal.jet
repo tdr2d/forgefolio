@@ -8,6 +8,7 @@
 }
 .core-modal-hidden { display: none !important;}
 
+
 .core-modal__confirm {
     position: absolute;
     display: block;
@@ -19,17 +20,22 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.core-modal__confirm > div {
+
+.core-modal__confirm-text {
+  color: var(--color-dark);
 }
 </style>
 
 <a class="core-modal core-modal-hidden" id="core-modal">
   <div class="core-modal__confirm text-center">
     <div>
-    <p id="core-modal__confirm-text">Are you sure you want to continue ?</p>
+    <p id="core-modal__confirm-text" class="core-modal__confirm-text">Are you sure you want to continue ?</p>
     <br>
-    <button id="core-modal__confirm-yes" type="button" class="btn">Yes</button>
-    <button id="core-modal__confirm-no"  type="button" class="btn">No</button>
+    <div class="f fc">
+      <button id="core-modal__confirm-yes" type="button" class="button button--green">Yes</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button id="core-modal__confirm-no"  type="button" class="button button--red">No</button>
+    </div>
     </div>
   </div>
 </a>
