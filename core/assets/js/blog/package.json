@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild index.js --bundle --outfile=out.js",
-    "build:prod": "esbuild index.js --bundle --minify --outfile=out.js"
+    "build": "esbuild index.js --bundle --outfile=compiled.js",
+    "build:prod": "esbuild index.js --bundle --minify --outfile=compiled.js"
   },
   "author": "",
   "license": "ISC",

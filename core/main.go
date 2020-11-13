@@ -27,7 +27,6 @@ func main() {
 		return c.Render("admin/home", fiber.Map{"Title": "Home", "Navigation": admin.Navigation}, "layouts/main")
 	})
 	admin.MediaController(app)
-	// admin.PluginController(app)
 	admin.BlogController(app)
 	app.Get("/settings", func(c *fiber.Ctx) error {
 		return c.Render("admin/settings", fiber.Map{"Title": "Settings", "Navigation": admin.Navigation}, "layouts/main")

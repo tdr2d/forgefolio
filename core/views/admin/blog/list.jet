@@ -1,0 +1,15 @@
+<div class="f fc">
+<a href="blog-posts/new" class="button button--regular"> <i data-feather="plus"></i>Create a new post </a>
+</div>
+
+<br>
+
+<ul class="core-blog-list">
+{{ range Posts }}
+<li class="core-blog-item">
+    <a href="/blog-posts/{{ .Path }}">{{ .Name }}</a> 
+    <span></span>
+    <span></span>
+</li>
+{{ end }}
+</ul>

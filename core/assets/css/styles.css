@@ -2,7 +2,7 @@
 body, h1, h2, h3, h4, h5, p, ul, dl, figure { margin: 0; padding: 0 }
 html, body, main, nav { height: 100%; }
 button, input { color: inherit; font-size: inherit; font-family: inherit; }
-a, a:visited { text-decoration: none; color: var(--color-blue); }
+a, a:visited { text-decoration: none; color: inherit; }
 a:hover, a:visited:hover { text-decoration: underline; color: var(--color-blue); }
 
 /* Global fonctions */
@@ -64,7 +64,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 10px;
-	box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.15);
+	border-bottom: 1px solid rgb(0 0 0 / 9%);
 }
 .header__sides {
 	width: 25px;

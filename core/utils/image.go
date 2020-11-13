@@ -8,8 +8,6 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 	"os"
-	"path/filepath"
-	"strings"
 
 	"github.com/nfnt/resize"
 	log "github.com/sirupsen/logrus"
@@ -45,11 +43,4 @@ func Thumbnail(fromImagePath string, width uint, height uint, outputDir string) 
 		}
 	}
 	return thumbnailPath, nil
-}
-
-// GetDirNameExtension splits the path in Dir, name and extension
-func GetDirNameExtension(path string) (string, string, string) {
-	base := filepath.Base(path)
-	ext := filepath.Ext(base)
-	return filepath.Dir(path), strings.TrimSuffix(base, ext), ext
 }

@@ -1,7 +1,7 @@
 <style>
 nav {
 	width: 180px;
-	box-shadow: 1px 0px 9px 0px rgba(0,0,0,0.15);
+	border-right: 1px solid rgb(0 0 0 / 9%);
 	display: table-cell;
 	transition: width 0.45s ease-in-out;
 	white-space: nowrap;

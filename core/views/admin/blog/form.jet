@@ -1,0 +1,45 @@
+<style>
+/* Header */
+h1.ce-header {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+/* Image */
+.image-toool__caption {
+  border: none;
+  text-align: center;
+  font-size: small;
+}
+
+</style>
+<div id="editorjs"></div>
+
+<div class="f fc" style="">
+  <button id="save-button" class="button button--green button--rounded">
+    <i data-feather="save"></i> {{ if IsNew }} Save {{ else }} Edit {{ end }}
+  </button>
+</div>
+
+<pre id="output" class=""></pre>
+<script>
+{{ if IsNew }}
+var IS_NEW=true;
+var POST=null;
+{{ else }}
+var IS_NEW=false;
+var POST={
+  version: "{{ Post.Version }}",
+  time: {{ Post.Time }},
+  blocks: JSON.parse('{{ Post.Blocks | raw }}'),
+};
+{{ end }}
+console.log(POST);
+</script>
+<script src="/assets/js/blog/compiled.js"></script>
+<script>
+//window.onbeforeunload = function() {
+//   return "Confirm leaving";
+//};
+</script>

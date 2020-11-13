@@ -1,10 +1,8 @@
 # Features
 ## blog features
 - backend:
-  - save endpoint
-  - get all
-  - get one
   - update
+  - delete
 - save article
 - apply theme
 - display pages
@@ -21,8 +19,10 @@ pages screen
 plugin prototype
 plugin page
 setting screen
-
+handle errors with javascript
 
 # BUGS
 - can not upload big images, image is split in two and only first half is uploaded
 - CORS issues with fiber -> try with npm http server instead of python3
+
+

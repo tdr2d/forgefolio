@@ -1,18 +1,13 @@
 import EditorJS from '@editorjs/editorjs'; 
 import Header from '@editorjs/header'; 
-import List from '@editorjs/list'; 
 import ImageTool from '@editorjs/image';
+import {getInitialData} from './initialData';
 
 const backendUrl = "medias"
 const backendAssetUrl = "assets/media/"
-// const uploadHeaders = {
-//   "Content-Type": "multipart/form-data",
-// }
-
 const editor = new EditorJS({ 
-  holder: 'editorjs', 
-  placeholder: 'Let`s write an awesome story!',
-
+  holder: 'editorjs',
+  data: IS_NEW ? getInitialData() : POST,
   tools: {
     header: Header,
     image: {
@@ -35,21 +30,45 @@ const editor = new EditorJS({
   },
 })
 
-const saveButton = document.getElementById('save-button');
-const output = document.getElementById('output');
-saveButton.addEventListener('click', () => {
-  editor.save().then( savedData => {
-    output.innerHTML = JSON.stringify(savedData, null, 4);
+function findTitle(editorJsData) {
+  for (i in editorJsData.blocks) {
+    const block = editorJsData.blocks[i];
+    if (block.type == "header" || block.type == "paragraph") {
+      if (block.data.text && block.data.text.length > 3) {
+        return block.data.text.substr(0, 63).replace(' ', '_'); 
+      }
+    }
+  }
+  return "";
+}
+
+function postBlogPost(body) {
+  const method = IS_NEW ? 'POST' : 'PATCH';
+  const url = IS_NEW ? '/blog-posts' : '/blog-posts';
+  return fetch(url, {method: method, headers: {'Content-Type': 'application/json'}, body: body})
+}
+
+document.getElementById('save-button').addEventListener('click', () => {
+  editor.save()
+  .then(editorJsData => {
+    title = findTitle(editorJsData);
+    if (!title) {
+      return Promise.reject("Wrong title");
+    }
+    body = JSON.stringify({
+      id: `BP__${Number.MAX_SAFE_INTEGER - editorJsData.time}__${title}`,
+      time: editorJsData.time,
+      version: editorJsData.version,
+      blocks: JSON.stringify(editorJsData.blocks)
+    });
+    document.getElementById('output').innerHTML = JSON.stringify(editorJsData, null, 4);
+    return postBlogPost(body)
+  })
+  .then((res, err) => {
+    if (err) {
+      console.error(err)
+    } else {
+      console.log(res);
+    }
   })
 })
-
-
-// .image-toool__caption
-// border: none;
-// text-align: center;
-// font-size: small;
-// editor.save().then((outputData) => {
-//     console.log('Article data: ', outputData)
-//   }).catch((error) => {
-//     console.log('Saving failed: ', error)
-//   });
