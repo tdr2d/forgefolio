@@ -8,7 +8,7 @@ import (
 )
 
 // PluginController controller for the plugin screen and plugin assets
-func PluginController(app *fiber.App) {
+func PluginController(app fiber.Router) {
 	app.Get("/plugins/:pluginName/*", func(c *fiber.Ctx) error {
 		path := fmt.Sprintf("%s/%s/%s", "plugins", c.Params("pluginName"), c.Params("*1"))
 		log.Info(path)

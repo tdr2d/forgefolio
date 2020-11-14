@@ -16,6 +16,7 @@
   --font-face: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 </style>
+<link rel="stylesheet" href="/assets/css/normalize.css">
 <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
@@ -30,9 +31,6 @@
 {{ embed() }}
 </article>
 </main>
-<script>
-  feather.replace();
-  console.log('here');
-</script>
+<script>feather.replace();</script>
 </body>
 </html>

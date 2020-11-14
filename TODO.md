@@ -5,13 +5,15 @@
 - media copy clipboard + add image by url
 
 ## Theme
-theme plugin prototype
-theme page
+- load theme dir and register themes
+- preview the index page using the theme
+- use theme in editorjs
 
 ## Pages
 pages screen
 
 ## Others
+thumbnail by size
 plugin prototype
 plugin page
 setting screen

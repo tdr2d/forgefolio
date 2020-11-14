@@ -1,0 +1,31 @@
+<html lang="en">
+<title>I’m cloning this Medium article in HTML without writing any CSS, thanks to Tachyons.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+
+<body>
+    <section class="center mw5 mw7-ns">
+        <article class="serif f4 lh-copy">
+            <h1 class="sans-serif lh-title">I’m cloning this Medium article in HTML without writing any CSS, thanks to Tachyons. (Day 1).</h1>
+            <p>The problem with radical ideas is that they provoke strong gut reactions.</p>
+            <p>CSS frameworks are no exception…</p>
+            <p>If this had been the first thing I read about Tachyons, I’m not sure I’d have wanted to try it either:</p>
+            <div class="center mw6">
+                <blockquote class="twitter-tweet" data-lang="en">
+                    <p lang="en" dir="ltr">Huh, just came across <a href="https://t.co/TgjqOJhZDW">https://t.co/TgjqOJhZDW</a> for the first time.<br><br>Worst web dev idea of all time, or just a really bad one?</p>&mdash; Dave Shea (@mezzoblue) <a href="https://twitter.com/mezzoblue/status/794419442272714752">November 4, 2016</a>
+                </blockquote>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <p>But because I don’t code every day, questions about syntax and best-practice come second fiddle to ease-of-use for me.</p>
+            <p>Basically, I just want tools that help me make good-looking websites, faster:</p>
+            <p>Can I get up and running quickly?<br> Do the ready-made components look good?<br> Is the codebase something I could get my head round?</p>
+            <p>(Which has always made mega-frameworks like Bootstrap unappealing to me.)</p>
+            <h2 class="sans-serif">So what is Tachyons?</h2>
+            <p>Tachyons is a framework created by Adam Morse to make working with CSS easier. The Tachyons homepage sets out his objectives for the project:</p>
+            <blockquote> Built for designing. Create fast loading, highly readable, and 100% responsive interfaces with as little css as possible.</blockquote>
+            <p>Sounds good right?</p>
+        </article>
+    </section>
+</body>
+
+</html>

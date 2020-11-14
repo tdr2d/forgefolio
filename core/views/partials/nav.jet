@@ -12,12 +12,26 @@ nav {
 .nav-separator {
 	margin: 18px 0;
 }
+
+.multi-color {
+	background: #ff0080;
+    background: -webkit-linear-gradient(to right, #40e0d0, #ff8c00, #ff0080);
+	background: linear-gradient(to right, #40e0d0, #ff8c00, #ff0080);
+	color: white !important;
+}
+
+.desert-color {
+    background: #C6FFDD;
+    background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);
+    background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);
+    color: white !important;
+}
 </style>
 <nav id="nav-core" class="">
   <dl>
     {{ range Constants.Navigation }}
       <dt>{{ if .name == ""}}<div class="nav-separator"></div>{{ else }}
-	  	<a class="button button--regular" href="{{ .link }}"><i data-feather="{{ .logo }}"></i>&nbsp;{{ .name }}</a>
+	  	<a class="button button--regular {{ .class }}" href="{{ .link }}"><i data-feather="{{ .logo }}"></i>&nbsp;{{ .name }}</a>
 		  {{ end }}
 		</dt>
     {{ end }}

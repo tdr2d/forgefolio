@@ -20,9 +20,9 @@
     <label class="core-media-list__item__image" for="checkbox-{{ .Name }}" style="background-image: url(/{{ Constants.MediaThumbnailDir }}/{{ .Name }}.jpg) ;"></label>
     <div class="core-media-infos f fsb">
       <input id="checkbox-{{ .Name }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name }}{{ .Ext }}">
-      <a href="/{{ Constants.MediaDir }}/{{ .Name }}{{ .Ext }}" class="feather-small button-default" target="_blank"><i data-feather="airplay"></i></a>
+      <a href="/{{ Constants.MediaDir }}/{{ .Name }}{{ .Ext }}" class="feather-small button--icon" target="_blank"><i data-feather="airplay"></i></a>
       <input type=text class="core-media-infos__input core-input-text fg" value="{{ .Name }}" data-name="{{ .Name }}" data-ext="{{ .Ext }}">
-      <button class="core-media-infos__save feather-small button-default" type="button"><i data-feather="save"></i></button>
+      <button class="core-media-infos__save feather-small button--icon" type="button"><i data-feather="save"></i></button>
     </div>
   </figure>
   {{ end }}

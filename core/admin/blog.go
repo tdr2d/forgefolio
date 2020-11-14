@@ -39,14 +39,14 @@ func BlogController(app fiber.Router) {
 			return c.Render("admin/blog/form", fiber.Map{"Title": "New Blog Posts", "IsNew": true, "Constants": Constants}, "layouts/main")
 		}
 		bp := new(BlogPost)
-		if err := utils.ReadStruct(bp, fmt.Sprintf("%s/%s", Constants.BlogDataDir, id)); err != nil {
+		if err := utils.ReadStruct(bp, fmt.Sprintf("%s/%s", DataDir.Blog, id)); err != nil {
 			log.Error(err)
 		}
 		return c.Render("admin/blog/form", fiber.Map{"Title": nameFromId(bp.Id), "IsNew": false, "Post": bp, "Constants": Constants}, "layouts/main")
 	})
 
 	app.Get("/blog-posts", func(c *fiber.Ctx) error {
-		files, err := ioutil.ReadDir(Constants.BlogDataDir)
+		files, err := ioutil.ReadDir(DataDir.Blog)
 		posts := make([]BlogPostList, len(files))
 		for i, item := range files {
 			posts[i].Name = nameFromId(item.Name())
@@ -65,7 +65,7 @@ func BlogController(app fiber.Router) {
 			log.Error(err)
 			return err
 		}
-		if err := utils.PersistStruct(bp, fmt.Sprintf("%s/%s", Constants.BlogDataDir, bp.Id)); err != nil {
+		if err := utils.PersistStruct(bp, fmt.Sprintf("%s/%s", DataDir.Blog, bp.Id)); err != nil {
 			log.Error(err)
 			return err
 		}
@@ -79,11 +79,11 @@ func BlogController(app fiber.Router) {
 			log.Error(err)
 			return err
 		}
-		if err := os.Rename(fmt.Sprintf("%s/%s", Constants.BlogDataDir, oldId), fmt.Sprintf("%s/%s", Constants.BlogDataDir, bp.Id)); err != nil {
+		if err := os.Rename(fmt.Sprintf("%s/%s", DataDir.Blog, oldId), fmt.Sprintf("%s/%s", DataDir.Blog, bp.Id)); err != nil {
 			log.Error(err)
 			return err
 		}
-		if err := utils.PersistStruct(bp, fmt.Sprintf("%s/%s", Constants.BlogDataDir, bp.Id)); err != nil {
+		if err := utils.PersistStruct(bp, fmt.Sprintf("%s/%s", DataDir.Blog, bp.Id)); err != nil {
 			log.Error(err)
 			return err
 		}
@@ -92,7 +92,7 @@ func BlogController(app fiber.Router) {
 
 	app.Delete("/blog-posts/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
-		if err := os.Remove(fmt.Sprintf("%s/%s", Constants.BlogDataDir, id)); err != nil {
+		if err := os.Remove(fmt.Sprintf("%s/%s", DataDir.Blog, id)); err != nil {
 			log.Error(err)
 			return err
 		}

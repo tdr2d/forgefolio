@@ -1,34 +1,44 @@
 package admin
 
-// Nav nav
-type Nav struct {
-	name string
-	link string
-	logo string // feather logo
+// DataDir represents struct of variables used for storing data
+type dataDir struct {
+	Blog  string
+	Page  string
+	Theme string
 }
 
-// Constant represent constant variables used in jet templates
+var DataDir dataDir = dataDir{
+	Blog:  "assets/blogdata",
+	Page:  "assets/pagedata",
+	Theme: "assets/themedata",
+}
+
+type nav struct {
+	name  string
+	link  string
+	logo  string // feather logo
+	class string // css class
+}
+
+// Constant represents struct of variables shared in jet templates
 type Constant struct {
 	MediaDir          string
 	MediaThumbnailDir string
-	BlogDataDir       string
-	PageDataDir       string
 	BodyLimit         int
-	Navigation        []Nav
+	Navigation        []nav
 }
 
 var Constants Constant = Constant{
 	MediaDir:          "assets/media",
 	MediaThumbnailDir: "assets/thumbnail",
-	BlogDataDir:       "assets/blogdata",
-	PageDataDir:       "assets/pagedata",
-	BodyLimit:         4 * 1024 * 1024,
-	Navigation: []Nav{
+	Navigation: []nav{
 		{name: "Home", link: "/admin", logo: "home"},
 		{name: "Media", link: "/admin/medias", logo: "image"},
+		{name: "Blog Posts", link: "/admin/blog-posts", logo: "file-text"},
 		{name: "Settings", link: "/admin/settings", logo: "settings"},
 		{name: ""},
-		{name: "Blog Posts", link: "/admin/blog-posts", logo: "file-text"},
-		{name: "Pages", link: "/admin/pages", logo: "layout"},
+		{name: "Theme", link: "/admin/theme", logo: "layout", class: "multi-color"},
+		{name: "Pages", link: "/admin/pages", logo: "layers", class: "desert-color"},
+		{name: ""},
 	},
 }

@@ -12,30 +12,30 @@ import (
 )
 
 var port string = ":8080"
+var bodyLimit int = 4 * 1024 * 1024
 
 func init() {
 	utils.CheckDir(admin.Constants.MediaDir)
 	utils.CheckDir(admin.Constants.MediaThumbnailDir)
-	utils.CheckDir(admin.Constants.BlogDataDir)
+	utils.CheckDir(admin.DataDir.Blog)
 	// log.SetReportCaller(true)
 }
 
 func main() {
 	engine := jet.New("./views", ".jet")
 	engine.Reload(true)
-	app := fiber.New(fiber.Config{Views: engine, BodyLimit: admin.Constants.BodyLimit})
+	app := fiber.New(fiber.Config{Views: engine, BodyLimit: bodyLimit})
 	app.Use(logger.New())
 	app.Use(recover.New())
 
 	adminApiGroup := app.Group("/admin")
-	adminApiGroup.Get("/", func(c *fiber.Ctx) error {
-		return c.Render("admin/home", fiber.Map{"Title": "Home", "Constants": admin.Constants}, "layouts/main")
-	})
+	admin.HomeController(adminApiGroup)
 	admin.MediaController(adminApiGroup)
 	admin.BlogController(adminApiGroup)
-	adminApiGroup.Get("/settings", func(c *fiber.Ctx) error {
-		return c.Render("admin/settings", fiber.Map{"Title": "Settings", "Constants": admin.Constants}, "layouts/main")
-	})
+	admin.PageController(adminApiGroup)
+	admin.ThemeController(adminApiGroup)
+	admin.SettingsController(adminApiGroup)
+
 	app.Static("/assets/", "./assets")
 	// data, _ := json.MarshalIndent(app.Stack(), "", "  ")
 	// log.Info(string(data))
