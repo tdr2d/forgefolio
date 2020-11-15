@@ -16,6 +16,6 @@ func ThemeController(app fiber.Router) {
 			"Constants": Constants,
 			"Themes":    nil,
 		}
-		return c.Render("admin/theme", data, "layouts/main")
+		return c.Render("views/admin/theme", data, Layout)
 	})
 }

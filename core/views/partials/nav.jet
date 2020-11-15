@@ -27,8 +27,8 @@ nav {
     color: white !important;
 }
 </style>
-<nav id="nav-core" class="">
-  <dl>
+<nav id="nav-core" class="h100">
+  <dl class="no-margin">
     {{ range Constants.Navigation }}
       <dt>{{ if .name == ""}}<div class="nav-separator"></div>{{ else }}
 	  	<a class="button button--regular {{ .class }}" href="{{ .link }}"><i data-feather="{{ .logo }}"></i>&nbsp;{{ .name }}</a>

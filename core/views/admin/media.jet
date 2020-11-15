@@ -16,7 +16,7 @@
 
 <div class="core-media-list">
   {{ range Medias }}
-  <figure class="core-media-list__item">
+  <figure class="core-media-list__item no-margin">
     <label class="core-media-list__item__image" for="checkbox-{{ .Name }}" style="background-image: url(/{{ Constants.MediaThumbnailDir }}/{{ .Name }}.jpg) ;"></label>
     <div class="core-media-infos f fsb">
       <input id="checkbox-{{ .Name }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name }}{{ .Ext }}">

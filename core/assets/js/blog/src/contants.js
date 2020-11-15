@@ -3,10 +3,9 @@ export function getInitialData(){
     "time": new Date().getTime(),
     "blocks": [
       {
-        "type": "header",
+        "type": "title",
         "data": {
           "text": "My title",
-          "level": 1
         }
       },
       {
@@ -18,4 +17,9 @@ export function getInitialData(){
     ],
     "version": "2.19.0"
   };
+}
+
+// FIXME import from jet
+export const EDITORJS_IDENTIFIERS = {
+  paragraph: "my-paragraph"
 }

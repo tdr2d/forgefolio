@@ -9,6 +9,6 @@ func SettingsController(app fiber.Router) {
 			"Constants": Constants,
 			"Settings":  nil,
 		}
-		return c.Render("admin/settings", data, "layouts/main")
+		return c.Render("views/admin/settings", data, Layout)
 	})
 }

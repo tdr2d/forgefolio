@@ -1,18 +1,10 @@
-<style>
-.core-blog-row {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-</style>
 <div class="f fc">
-<a href="blog-posts/new" class="button button--blue"> <i data-feather="plus"></i>Create a new post </a>
+    <a href="blog-posts/new" class="button button--blue"> <i data-feather="plus"></i>Create a new post </a>
 </div>
-
 <br>
-
-<table class="core-blog-list">
+<table class="core-table">
 {{ range Posts }}
-<tr class="core-blog-row">
+<tr class="core-row">
     <td><a href="/admin/blog-posts/{{ .Path }}">{{ .Name }}</a> </td>
     <td>Date: <span>{{ .Date }}</span></td>
     <td class="f fc">
@@ -21,8 +13,8 @@
 </tr>
 {{ end }}
 </table>
-<script>
 
+<script>
 document.querySelectorAll('.core-blog-row__delete').forEach(function(button){
     button.onclick = function() {
         OpenCoreModalConfirm(null, function(){
@@ -32,5 +24,4 @@ document.querySelectorAll('.core-blog-row__delete').forEach(function(button){
         })
     }
 })
-
 </script>

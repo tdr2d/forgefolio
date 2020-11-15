@@ -2,16 +2,15 @@
   "name": "blog-post",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "esbuild index.js --bundle --outfile=compiled.js",
-    "build:prod": "esbuild index.js --bundle --minify --outfile=compiled.js"
+    "build": "esbuild src/index.js --bundle --sourcemap --outfile=compiled.js",
+    "build:prod": "esbuild src/index.js --bundle --minify --outfile=compiled.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@editorjs/editorjs": "^2.19.0",
-    "@editorjs/header": "^2.6.0",
     "@editorjs/image": "^2.6.0"
   },
   "devDependencies": {

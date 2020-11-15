@@ -18,11 +18,13 @@ func init() {
 	utils.CheckDir(admin.Constants.MediaDir)
 	utils.CheckDir(admin.Constants.MediaThumbnailDir)
 	utils.CheckDir(admin.DataDir.Blog)
+	utils.CheckDir(admin.DataDir.Page)
+	utils.CheckDir(admin.DataDir.Theme)
 	// log.SetReportCaller(true)
 }
 
 func main() {
-	engine := jet.New("./views", ".jet")
+	engine := jet.New("./", ".jet")
 	engine.Reload(true)
 	app := fiber.New(fiber.Config{Views: engine, BodyLimit: bodyLimit})
 	app.Use(logger.New())
@@ -32,9 +34,9 @@ func main() {
 	admin.HomeController(adminApiGroup)
 	admin.MediaController(adminApiGroup)
 	admin.BlogController(adminApiGroup)
-	admin.PageController(adminApiGroup)
 	admin.ThemeController(adminApiGroup)
 	admin.SettingsController(adminApiGroup)
+	admin.PageController(app)
 
 	app.Static("/assets/", "./assets")
 	// data, _ := json.MarshalIndent(app.Stack(), "", "  ")

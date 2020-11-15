@@ -8,9 +8,9 @@ type dataDir struct {
 }
 
 var DataDir dataDir = dataDir{
-	Blog:  "assets/blogdata",
-	Page:  "assets/pagedata",
-	Theme: "assets/themedata",
+	Blog:  "assets/data/blogdata",
+	Page:  "assets/data/pagedata",
+	Theme: "assets/data/themedata",
 }
 
 type nav struct {
@@ -20,11 +20,12 @@ type nav struct {
 	class string // css class
 }
 
+var Layout string = "views/layouts/main"
+
 // Constant represents struct of variables shared in jet templates
 type Constant struct {
 	MediaDir          string
 	MediaThumbnailDir string
-	BodyLimit         int
 	Navigation        []nav
 }
 

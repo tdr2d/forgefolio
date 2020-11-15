@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" class="h100">
 <head>
 <title>{{ Title }}</title>
 <meta charset="utf-8">
@@ -19,15 +19,15 @@
 <link rel="stylesheet" href="/assets/css/normalize.css">
 <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
-<body>
+<body class="h100 core-body">
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 <script>var BASE_URL="/admin";</script>
-{{ include "partials/modal" }}
-<main>
-{{ include "partials/nav" }}
-{{ include "partials/notification" }}
-{{ include "partials/header" }}
-<article>
+{{ include "views/partials/modal" }}
+<main class="h100 core-main">
+{{ include "views/partials/nav" }}
+{{ include "views/partials/notification" }}
+{{ include "views/partials/header" }}
+<article class="core-content">
 {{ embed() }}
 </article>
 </main>

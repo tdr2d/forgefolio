@@ -34,7 +34,7 @@ func MediaController(app fiber.Router) {
 			"Constants": Constants,
 			"Medias":    medias,
 		}
-		return c.Render("admin/media", data, "layouts/main")
+		return c.Render("views/admin/media", data, Layout)
 	})
 
 	app.Post("/medias", func(c *fiber.Ctx) error {

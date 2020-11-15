@@ -36,13 +36,13 @@ func BlogController(app fiber.Router) {
 	app.Get("/blog-posts/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
 		if id == "new" {
-			return c.Render("admin/blog/form", fiber.Map{"Title": "New Blog Posts", "IsNew": true, "Constants": Constants}, "layouts/main")
+			return c.Render("views/admin/blog/form", fiber.Map{"Title": "New Blog Posts", "IsNew": true, "Constants": Constants}, Layout)
 		}
 		bp := new(BlogPost)
 		if err := utils.ReadStruct(bp, fmt.Sprintf("%s/%s", DataDir.Blog, id)); err != nil {
 			log.Error(err)
 		}
-		return c.Render("admin/blog/form", fiber.Map{"Title": nameFromId(bp.Id), "IsNew": false, "Post": bp, "Constants": Constants}, "layouts/main")
+		return c.Render("views/admin/blog/form", fiber.Map{"Title": nameFromId(bp.Id), "IsNew": false, "Post": bp, "Constants": Constants}, Layout)
 	})
 
 	app.Get("/blog-posts", func(c *fiber.Ctx) error {
@@ -56,7 +56,7 @@ func BlogController(app fiber.Router) {
 		if err != nil {
 			log.Error(err)
 		}
-		return c.Render("admin/blog/list", fiber.Map{"Title": "Blog Posts", "Posts": posts, "Constants": Constants}, "layouts/main")
+		return c.Render("views/admin/blog/list", fiber.Map{"Title": "Blog Posts", "Posts": posts, "Constants": Constants}, Layout)
 	})
 
 	app.Post("/blog-posts", func(c *fiber.Ctx) error {
