@@ -12,6 +12,7 @@ a:hover, a:visited:hover { text-decoration: underline; color: var(--color-blue);
 .h100 { height: 100% }
 .no-margin { margin: 0; }
 .f   { display: flex }
+.fv  { display: flex; flex-direction: column !important }
 .fc  { justify-content: center }
 .fsb { justify-content: space-between }
 .fic { align-items: center }

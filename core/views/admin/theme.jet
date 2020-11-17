@@ -2,4 +2,19 @@
 
 <div>theme options</div>
 
-<div></div>
+<div>Select Theme</div>
+
+<form action="" method="POST">
+  <div class="f core-theme-list">
+    {{ range Themes }}
+      <label for="theme-{{ .Name }}" class="button fv">
+        <div>{{ .Name }}</div>
+        <div>{{ .Author }}</div>
+        <div>{{ .Version }}</div>
+        <input type="radio" id="theme-{{ .Name }}" name="theme" value="{{ .Path }}">
+      </label>
+    {{ end }}
+  </div>
+
+  <input type="submit" value="Submit" class="button button--blue">
+</form>

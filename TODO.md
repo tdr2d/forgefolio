@@ -1,5 +1,6 @@
 # Features
 ## blog features
+- load theme
 - apply theme
 - display pages
 - media copy clipboard + add image by url

@@ -2,15 +2,17 @@ package admin
 
 // DataDir represents struct of variables used for storing data
 type dataDir struct {
-	Blog  string
-	Page  string
-	Theme string
+	Blog      string
+	Page      string
+	Theme     string
+	ThemeData string
 }
 
 var DataDir dataDir = dataDir{
-	Blog:  "assets/data/blogdata",
-	Page:  "assets/data/pagedata",
-	Theme: "assets/data/themedata",
+	Blog:      "assets/data/blogdata",
+	Page:      "assets/data/pagedata",
+	Theme:     "themes",
+	ThemeData: "assets/data/themedata",
 }
 
 type nav struct {
@@ -20,18 +22,21 @@ type nav struct {
 	class string // css class
 }
 
-var Layout string = "views/layouts/main"
+const ThemeIndexConfigFile string = "theme.json"
+const Layout string = "views/layouts/main"
 
 // Constant represents struct of variables shared in jet templates
 type Constant struct {
 	MediaDir          string
 	MediaThumbnailDir string
+	BaseUrl           string
 	Navigation        []nav
 }
 
 var Constants Constant = Constant{
 	MediaDir:          "assets/media",
 	MediaThumbnailDir: "assets/thumbnail",
+	BaseUrl:           "/admin",
 	Navigation: []nav{
 		{name: "Home", link: "/admin", logo: "home"},
 		{name: "Media", link: "/admin/medias", logo: "image"},
