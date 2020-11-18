@@ -1,5 +1,10 @@
 {
     "name": "blog-theme",
     "version": "0.1.0",
-    "author": "Thomas Webber"
+    "author": "Thomas Webber",
+    "blog": {
+        "styles": "styles.css",
+        "postpage": "pages/post.jet",
+        "homepage": "pages/list.jet"
+    }
 }

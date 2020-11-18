@@ -1,19 +1,14 @@
 {
     "preview": [],
     "blog": {
-    "defaults": {
-        "styles": "styles.css",
-        "homepage": "pages/list.jet",
-        "postpage": "pages/post.jet",
-        "layout": "layout.jet"
-    },
-    "editorClasses": {
-        "title": "",
-        "paragraph": ""
-    },
-    "pages": [
-        {"name": "Post list", "Description": "Page to list the blog posts", "path": "pages/list.jet"},
-        {"name": "Post", "Description": "Page to show a single post", "path": "pages/post.jet"}
-    ],
-    "blocks": []
+        "editorClasses": {
+            "title": "",
+            "paragraph": ""
+        },
+        "pages": [
+            {"name": "Post list", "Description": "Page to list the blog posts", "path": "pages/list.jet"},
+            {"name": "Post", "Description": "Page to show a single post", "path": "pages/post.jet"}
+        ],
+        "blocks": []
+    }
 }

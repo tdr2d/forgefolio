@@ -1,17 +1,11 @@
 # Features
 ## blog features
-- load theme
-- apply theme
+- apply theme style to editor 
 - display pages
 - media copy clipboard + add image by url
 
-## Theme
-- load theme dir and register themes
-- preview the index page using the theme
-- use theme in editorjs
-
 ## Pages
-pages screen
+- pages screens
 
 ## Others
 thumbnail by size

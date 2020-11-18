@@ -4,14 +4,14 @@ package admin
 type dataDir struct {
 	Blog      string
 	Page      string
-	Theme     string
+	Themes    string
 	ThemeData string
 }
 
 var DataDir dataDir = dataDir{
 	Blog:      "assets/data/blogdata",
 	Page:      "assets/data/pagedata",
-	Theme:     "themes",
+	Themes:    "themes",
 	ThemeData: "assets/data/themedata",
 }
 

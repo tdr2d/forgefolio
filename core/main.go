@@ -19,8 +19,9 @@ func init() {
 	utils.CheckDir(admin.Constants.MediaThumbnailDir)
 	utils.CheckDir(admin.DataDir.Blog)
 	utils.CheckDir(admin.DataDir.Page)
-	utils.CheckDir(admin.DataDir.Theme)
-	// log.SetReportCaller(true)
+	utils.CheckDir(admin.DataDir.Themes)
+	utils.CheckDir(admin.DataDir.ThemeData)
+	log.SetReportCaller(true)
 }
 
 func main() {
