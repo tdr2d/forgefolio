@@ -1,8 +1,9 @@
 import EditorJS from '@editorjs/editorjs'; 
-// import ImageTool from '@editorjs/image';
-import { getInitialData } from './contants';
+import { getInitialData } from './utils';
 import Title from './editor/Title';
+import SubTitle from './editor/SubTitle';
 import Paragraph from './editor/Paragraph';
+import Html from './editor/Html';
 
 const backendUrl = "medias";
 const backendAssetUrl = "assets/media/";
@@ -24,19 +25,14 @@ const editor = new EditorJS({
   data: IS_NEW ? getInitialData() : POST,
   logLevel: 'VERBOSE',
   tools: {
-    title: {
-      class: Title,
-      config: {
-        customCss: { title: "my-title"}
-      }
-    },
+    title:    { class: Title,    config: { customCssClasses: EDITORJS_CLASSES ? EDITORJS_CLASSES.h1 : [] }},
+    subtitle: { class: SubTitle, config: { customCssClasses: EDITORJS_CLASSES ? EDITORJS_CLASSES.h2 : [] }},
     paragraph: {
       class: Paragraph,
       inlineToolbar: true,
-      config: {
-        customCss: { paragraph: "my-paragraph"}
-      }
+      config: { customCssClasses: EDITORJS_CLASSES ? EDITORJS_CLASSES.p : [] }
     },
+    html: {class: Html, config: { customCssClasses: EDITORJS_CLASSES ? EDITORJS_CLASSES.html : [] }}
     // image: {
     //   class: ImageTool,
     //   config: {

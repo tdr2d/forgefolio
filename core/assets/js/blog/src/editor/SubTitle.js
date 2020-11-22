@@ -1,9 +1,10 @@
-/* Title renders text in h1 tag */
-export default class Title {
+
+/* SubTitle renders text in h2 tag */
+export default class SubTitle {
     static get toolbox() {
       return {
-        title: 'Title',
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 4v3h5.5v12h3V7H19V4z"/></svg>'
+        title: 'SubTitle',
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M2.5,4v3h5v12h3V7h5V4H2.5z M21.5,9h-9v3h3v7h3v-7h3V9z"/></g></g></g></svg>'
       };
     }
 
@@ -16,7 +17,7 @@ export default class Title {
     }
   
     render(){
-      let tag = document.createElement('h1');
+      let tag = document.createElement('h2');
       if (this.config.customCssClasses && this.config.customCssClasses.length > 0) {
         this.config.customCssClasses.forEach(e => {
           tag.classList.add(e);

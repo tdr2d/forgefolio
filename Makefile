@@ -3,7 +3,7 @@
 help: 
 	@fgrep -h "##" Makefile | fgrep -v "fgrep" | gsed -r 's/(.*):.*##(.*)/\1:\2/' - | column -s: -t | sed -e 's/##//'
 
-core: ## Run core
+core: blogjs ## Run core
 	cd core && go run .
 
 redis: ## Run redis-server

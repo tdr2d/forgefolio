@@ -1,19 +1,30 @@
 # Features
-## blog features
-- apply theme style to editor 
-- display pages
-- media copy clipboard + add image by url
 
-## Pages
-- pages screens
+## Blog Roadmap
+# Editor
+custom html
+image
+render editor to html
+
+# Pages
+- post list
+- post page
+- static page generator
+
+## Landing Page Roadmap
+block
+drag and drop 
 
 ## Others
 thumbnail by size
+media copy clipboard + add image by url
 plugin prototype
 plugin page
 setting screen
 handle errors with javascript
-notifications
+authentication
+newsletter
+error messages in front-end
 e2e tests
 tls support
 

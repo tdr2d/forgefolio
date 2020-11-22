@@ -8,10 +8,12 @@ Docs:
 - Jet templates: https://github.com/CloudyKit/jet/blob/master/docs/syntax.md
 - icons: https://feathericons.com/
 
-## blog-posts
+## /admin/blog edit page
 Compile javascript :
 ```
 make blogjs
 ```
-- wysiwyg: https://editorjs.io/
+Docs:
 - babel compiler: https://esbuild.github.io/getting-started/#your-first-bundle 
+- wysiwyg: https://editorjs.io/
+- codeflask: https://github.com/kazzkiq/CodeFlask

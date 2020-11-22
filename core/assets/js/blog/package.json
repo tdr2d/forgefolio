@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@editorjs/editorjs": "^2.19.0",
-    "@editorjs/image": "^2.6.0"
+    "@editorjs/image": "^2.6.0",
+    "codeflask": "^1.4.1"
   },
   "devDependencies": {
     "esbuild": "^0.8.3"

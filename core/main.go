@@ -17,9 +17,9 @@ var bodyLimit int = 4 * 1024 * 1024
 func init() {
 	utils.CheckDir(admin.Constants.MediaDir)
 	utils.CheckDir(admin.Constants.MediaThumbnailDir)
+	utils.CheckDir(admin.Constants.ThemesDir)
 	utils.CheckDir(admin.DataDir.Blog)
 	utils.CheckDir(admin.DataDir.Page)
-	utils.CheckDir(admin.DataDir.Themes)
 	utils.CheckDir(admin.DataDir.ThemeData)
 	log.SetReportCaller(true)
 }
@@ -40,6 +40,7 @@ func main() {
 	admin.PageController(app)
 
 	app.Static("/assets/", "./assets")
+	app.Static("/"+admin.Constants.ThemesDir+"/", admin.Constants.ThemesDir)
 	// data, _ := json.MarshalIndent(app.Stack(), "", "  ")
 	// log.Info(string(data))
 	log.Fatal(app.Listen(port))

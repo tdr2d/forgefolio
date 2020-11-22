@@ -35,14 +35,17 @@ func nameFromId(id string) string {
 func BlogController(app fiber.Router) {
 	app.Get("/blog-posts/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
-		if id == "new" {
-			return c.Render("views/admin/blog/form", fiber.Map{"Title": "New Blog Posts", "IsNew": true, "Constants": Constants}, Layout)
-		}
+		theme := GetCurrentTheme()
 		bp := new(BlogPost)
-		if err := utils.ReadStruct(bp, fmt.Sprintf("%s/%s", DataDir.Blog, id)); err != nil {
-			log.Error(err)
+		isNew := (id == "new")
+		title := "New Blog Posts"
+		if !isNew {
+			if err := utils.ReadStruct(bp, fmt.Sprintf("%s/%s", DataDir.Blog, id)); err != nil {
+				log.Error(err)
+			}
+			title = nameFromId(bp.Id)
 		}
-		return c.Render("views/admin/blog/form", fiber.Map{"Title": nameFromId(bp.Id), "IsNew": false, "Post": bp, "Constants": Constants}, Layout)
+		return c.Render("views/admin/blog/form", fiber.Map{"Title": title, "IsNew": isNew, "Post": bp, "Constants": Constants, "Theme": theme}, Layout)
 	})
 
 	app.Get("/blog-posts", func(c *fiber.Ctx) error {

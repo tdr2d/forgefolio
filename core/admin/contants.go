@@ -4,14 +4,12 @@ package admin
 type dataDir struct {
 	Blog      string
 	Page      string
-	Themes    string
 	ThemeData string
 }
 
 var DataDir dataDir = dataDir{
 	Blog:      "assets/data/blogdata",
 	Page:      "assets/data/pagedata",
-	Themes:    "themes",
 	ThemeData: "assets/data/themedata",
 }
 
@@ -30,6 +28,7 @@ type Constant struct {
 	MediaDir          string
 	MediaThumbnailDir string
 	BaseUrl           string
+	ThemesDir         string
 	Navigation        []nav
 }
 
@@ -37,6 +36,7 @@ var Constants Constant = Constant{
 	MediaDir:          "assets/media",
 	MediaThumbnailDir: "assets/thumbnail",
 	BaseUrl:           "/admin",
+	ThemesDir:         "themes",
 	Navigation: []nav{
 		{name: "Home", link: "/admin", logo: "home"},
 		{name: "Media", link: "/admin/medias", logo: "image"},

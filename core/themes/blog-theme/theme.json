@@ -2,9 +2,19 @@
     "name": "blog-theme",
     "version": "0.1.0",
     "author": "Thomas Webber",
+    "preview": [""],
     "blog": {
         "styles": "styles.css",
-        "postpage": "pages/post.jet",
-        "homepage": "pages/list.jet"
+        "editorClasses": {
+            "h1": ["sans-serif", "lh-title"],
+            "h2": ["sans-serif"],
+            "p": [],
+            "html": ["center", "mw6"]
+        },
+        "pages": [
+            {"name": "Post list", "Description": "Page to list the blog posts", "path": "pages/list.jet", "type": "postlist"},
+            {"name": "Post", "Description": "Page to show a single post", "path": "pages/post.jet", "type": "post"}
+        ],
+        "blocks": []
     }
 }

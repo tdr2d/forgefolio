@@ -1,4 +1,6 @@
-export default class Text {
+import {setEditorClasses} from '../utils';
+
+export default class Paragraph {
   constructor({data, config, api, readOnly}) {
     this.api = api;
     this.readOnly = readOnly;
@@ -20,17 +22,14 @@ export default class Text {
   }
 
   drawView() {
-    let div = document.createElement('p');
-    const cssClass = this.config.customCss && 'text' in this.config.customCss ? this.config.customCss.text : '';
-    if (cssClass) {
-      div.classList.add(cssClass);
-    }
-    div.contentEditable = false;
+    let el = document.createElement('p');
+    setEditorClasses(this.config, el);
+    el.contentEditable = false;
     if (!this.readOnly) {
-      div.contentEditable = true;
-      div.addEventListener('keyup', this.onKeyUp.bind(this));
+      el.contentEditable = true;
+      el.addEventListener('keyup', this.onKeyUp.bind(this));
     }
-    return div;
+    return el;
   }
 
   render() {
