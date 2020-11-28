@@ -1,248 +1,139 @@
 export default class Image {
+  static get toolbox() {
+    return {
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 336 276"><path d="M291 150.242V79c0-18.778-15.222-34-34-34H79c-18.778 0-34 15.222-34 34v42.264l67.179-44.192 80.398 71.614 56.686-29.14L291 150.242zm-.345 51.622l-42.3-30.246-56.3 29.884-80.773-66.925L45 174.187V197c0 18.778 15.222 34 34 34h178c17.126 0 31.295-12.663 33.655-29.136zM79 0h178c43.63 0 79 35.37 79 79v118c0 43.63-35.37 79-79 79H79c-43.63 0-79-35.37-79-79V79C0 35.37 35.37 0 79 0z"/></svg>',
+      title: 'Text'
+    };
+  }
+
   constructor({ data, config, api, readOnly }) {
     this.api = api;
     this.readOnly = readOnly;
-     // When block is only constructing, current block points to previous block. So real block index will be +1 after rendering
-    this.blockIndex = this.api.blocks.getCurrentBlockIndex() + 1;
-    this.CSS = {
-      baseClass: this.api.styles.block,
+    this.blockIndex = this.api.blocks.getCurrentBlockIndex() + 1; // When block is only constructing, current block points to previous block. So real block index will be +1 after rendering
+    console.log(config);
+    this.CSS = Object.assign({
       loading: this.api.styles.loader,
-      input: this.api.styles.input,
       settingsButton: this.api.styles.settingsButton,
       settingsButtonActive: this.api.styles.settingsButtonActive,
-      wrapper: 'cdx-simple-image',
-      imageHolder: 'cdx-simple-image__picture',
-      caption: 'cdx-simple-image__caption',
-    };
-
-    this.nodes = {
-      wrapper: null,
-      imageHolder: null,
-      image: null,
-      caption: null,
-    };
+    }, config.css);
+    console.log(this.CSS);
 
     this.data = {
       url: data.url || '',
       caption: data.caption || '',
-      withBorder: data.withBorder !== undefined ? data.withBorder : false,
-      withBackground: data.withBackground !== undefined ? data.withBackground : false,
-      stretched: data.stretched !== undefined ? data.stretched : false,
     };
 
+    this.nodes = {
+      wrapper: this._make('div', ['f']),
+      input: this._make('input', [this.api.styles.input], {"placeholder": "Image url"}),
+      submitButton: this._make('button', ['button', 'button--blue'], {}, "Submit"),
+      loader: this._make('div', this.CSS.loading),
+      imageHolder: this._make('figure', this.CSS.imageHolder),
+      image: this._make('img', this.CSS.image),
+      caption: this._make('figcaption', this.CSS.imageCaption, {contentEditable: !this.readOnly, innerHTML: this.data.caption || ''}),
+    };
+    this.nodes.submitButton.onclick = this.onInputSubmit.bind(this);
+    this.nodes.caption.dataset.placeholder = 'Enter a caption';
+    this._view = this.data.url != '' ? 'visual' : 'input';
     this.settings = [
       {
-        name: 'withBorder',
-        icon: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15.8 10.592v2.043h2.35v2.138H15.8v2.232h-2.25v-2.232h-2.4v-2.138h2.4v-2.28h2.25v.237h1.15-1.15zM1.9 8.455v-3.42c0-1.154.985-2.09 2.2-2.09h4.2v2.137H4.15v3.373H1.9zm0 2.137h2.25v3.325H8.3v2.138H4.1c-1.215 0-2.2-.936-2.2-2.09v-3.373zm15.05-2.137H14.7V5.082h-4.15V2.945h4.2c1.215 0 2.2.936 2.2 2.09v3.42z"/></svg>`,
+        name: 'Input View',
+        el: this._make('div'),
+        view: "input",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M21 3.01H3c-1.1 0-2 .9-2 2V9h2V4.99h18v14.03H3V15H1v4.01c0 1.1.9 1.98 2 1.98h18c1.1 0 2-.88 2-1.98v-14c0-1.11-.9-2-2-2zM11 16l4-4-4-4v3H1v2h10v3z"/></svg>',
       },
       {
-        name: 'stretched',
-        icon: `<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>`,
-      },
-      {
-        name: 'withBackground',
-        icon: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.043 8.265l3.183-3.183h-2.924L4.75 10.636v2.923l4.15-4.15v2.351l-2.158 2.159H8.9v2.137H4.7c-1.215 0-2.2-.936-2.2-2.09v-8.93c0-1.154.985-2.09 2.2-2.09h10.663l.033-.033.034.034c1.178.04 2.12.96 2.12 2.089v3.23H15.3V5.359l-2.906 2.906h-2.35zM7.951 5.082H4.75v3.201l3.201-3.2zm5.099 7.078v3.04h4.15v-3.04h-4.15zm-1.1-2.137h6.35c.635 0 1.15.489 1.15 1.092v5.13c0 .603-.515 1.092-1.15 1.092h-6.35c-.635 0-1.15-.489-1.15-1.092v-5.13c0-.603.515-1.092 1.15-1.092z"/></svg>`,
-      },
+        name: 'Image View',
+        el: this._make('div'),
+        view: "visual",
+        icon: Image.toolbox.icon
+      }
     ];
   }
 
-  /**
-   * Creates a Block:
-   *  1) Show preloader
-   *  2) Start to load an image
-   *  3) After loading, append image and caption input
-   *
-   * @public
-   */
   render() {
-    const wrapper = this._make('div', [this.CSS.baseClass, this.CSS.wrapper]),
-        loader = this._make('div', this.CSS.loading),
-        imageHolder = this._make('div', this.CSS.imageHolder),
-        image = this._make('img'),
-        caption = this._make('div', [this.CSS.input, this.CSS.caption], {
-          contentEditable: !this.readOnly,
-          innerHTML: this.data.caption || '',
-        });
-
-    caption.dataset.placeholder = 'Enter a caption';
-    wrapper.appendChild(loader);
-
-    if (this.data.url) {
-      image.src = this.data.url;
-    }
-
-    image.onload = () => {
-      wrapper.classList.remove(this.CSS.loading);
-      imageHolder.appendChild(image);
-      wrapper.appendChild(imageHolder);
-      wrapper.appendChild(caption);
-      loader.remove();
-      this._acceptTuneView();
-    };
-
-    image.onerror = (e) => {
-      console.log('Failed to load an image', e);
-    };
-
-    this.nodes.imageHolder = imageHolder;
-    this.nodes.wrapper = wrapper;
-    this.nodes.image = image;
-    this.nodes.caption = caption;
-
-    return wrapper;
+    if (this._view == "input") { this._renderInput(); }
+    else if (this._view == "visual") { this._renderImage(); }
+    return this.nodes.wrapper;
   }
 
-  save(blockContent) {
-    const image = blockContent.querySelector('img'),
-        caption = blockContent.querySelector('.' + this.CSS.input);
+  _renderInput() {
+    this.nodes.wrapper.innerHTML = "";
+    this.nodes.wrapper.classList.add('f');
+    this.nodes.wrapper.appendChild(this.nodes.input);
+    this.nodes.wrapper.appendChild(this.nodes.submitButton);
+  }
 
-    if (!image) {
-      return this.data;
+  _renderImage() {
+    this.nodes.wrapper.innerHTML = "";
+    this.nodes.wrapper.classList.remove('f');
+    this.nodes.wrapper.appendChild(this.nodes.loader);
+    if (this.data.url) {
+      this.nodes.image.src = this.data.url;
     }
 
+    this.nodes.image.onload = () => {
+      this.nodes.wrapper.innerHTML = "";
+      this.nodes.imageHolder.appendChild(this.nodes.image);
+      this.nodes.imageHolder.appendChild(this.nodes.caption);
+      this.nodes.wrapper.appendChild(this.nodes.imageHolder);
+    };
+    this.nodes.image.onerror = (e) => {
+      console.log('Failed to load an image', e);
+      this._updateView('input');
+    };
+  }
+
+  onInputSubmit() {
+    this.data.url = this.nodes.input.value;
+    this._updateView('visual');
+  }
+
+  save() {
     return Object.assign(this.data, {
-      url: image.src,
-      caption: caption.innerHTML,
+      caption: this.nodes.caption.innerHTML,
     });
   }
 
   static get sanitize() {
     return {
       url: {},
-      withBorder: {},
-      withBackground: {},
-      stretched: {},
       caption: {
         br: true,
       },
     };
   }
 
-  onDropHandler(file) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file); // convert to base64
-
-    return new Promise(resolve => {
-      reader.onload = (event) => {
-        resolve({
-          url: event.target.result,
-          caption: file.name,
-        });
-      };
-    });
-  }
-
-  onPaste(event) {
-    switch (event.type) {
-      case 'tag': {
-        const img = event.detail.data;
-
-        this.data = {
-          url: img.src,
-        };
-        break;
-      }
-
-      case 'pattern': {
-        const { data: text } = event.detail;
-
-        this.data = {
-          url: text,
-        };
-        break;
-      }
-
-      case 'file': {
-        const { file } = event.detail;
-
-        this.onDropHandler(file)
-          .then(data => {
-            this.data = data;
-          });
-
-        break;
-      }
-    }
-  }
-
-  get data() {
-    return this._data;
-  }
-
-  set data(data) {
-    this._data = Object.assign({}, this.data, data);
-
-    if (this.nodes.image) {
-      this.nodes.image.src = this.data.url;
-    }
-
-    if (this.nodes.caption) {
-      this.nodes.caption.innerHTML = this.data.caption;
-    }
-  }
-
-  static get pasteConfig() {
-    return {
-      patterns: {
-        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i,
-      },
-      tags: [ 'img' ],
-      files: {
-        mimeTypes: [ 'image/*' ],
-      },
-    };
-  }
-
   renderSettings() {
     const wrapper = document.createElement('div');
-
     this.settings.forEach(tune => {
-      const el = document.createElement('div');
-
-      el.classList.add(this.CSS.settingsButton);
-      el.innerHTML = tune.icon;
-
-      el.addEventListener('click', () => {
-        this._toggleTune(tune.name);
-        el.classList.toggle(this.CSS.settingsButtonActive);
+      tune.el.classList.add(this.CSS.settingsButton);
+      tune.el.innerHTML = tune.icon;
+      tune.el.addEventListener('click', () => {
+        this._updateView(tune.view);
       });
-
-      el.classList.toggle(this.CSS.settingsButtonActive, this.data[tune.name]);
-
-      wrapper.appendChild(el);
+      wrapper.appendChild(tune.el);
     });
-
     return wrapper;
   };
 
-  _make(tagName, classNames = null, attributes = {}) {
+  _make(tagName, classNames = null, attributes = {}, content = null) {
     const el = document.createElement(tagName);
-
     if (Array.isArray(classNames)) {
       el.classList.add(...classNames);
     } else if (classNames) {
       el.classList.add(classNames);
     }
-
     for (const attrName in attributes) {
       el[attrName] = attributes[attrName];
     }
-
+    if (content) { el.innerHTML = content; }
     return el;
   }
 
-  _toggleTune(tune) {
-    this.data[tune] = !this.data[tune];
-    this._acceptTuneView();
-  }
-
-  _acceptTuneView() {
-    this.settings.forEach(tune => {
-      this.nodes.imageHolder.classList.toggle(this.CSS.imageHolder + '--' + tune.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`), !!this.data[tune.name]);
-
-      if (tune.name === 'stretched') {
-        this.api.blocks.stretchBlock(this.blockIndex, !!this.data.stretched);
-      }
-    });
+  _updateView(view) {
+    this._view = view;
+    this.settings.forEach(t => t.el.classList.toggle(this.CSS.settingsButtonActive, t.view == this._view));
+    this.render();
   }
 }

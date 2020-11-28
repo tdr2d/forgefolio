@@ -1,9 +1,7 @@
-## Blog Roadmap
-medium clone
 # Editor
-image by url
+copy clipboard media url button 
+quote block
 render editor to html
-copy links
 
 # Pages
 - post list

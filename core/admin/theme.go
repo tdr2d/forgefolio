@@ -35,6 +35,7 @@ type Theme struct {
 }
 
 const currentThemeKey = "current_theme"
+const configFile = "theme.json"
 
 func openThemeConfig(basePath string, theme *Theme) error {
 	themeConfPath := fmt.Sprintf("%s/%s/%s", Constants.ThemesDir, basePath, ThemeIndexConfigFile)
@@ -52,6 +53,14 @@ func GetCurrentTheme() *Theme {
 	currentTheme := new(Theme)
 	utils.ReadStruct(currentTheme, fmt.Sprintf("%s/%s", DataDir.ThemeData, currentThemeKey))
 	return currentTheme
+}
+
+func GetCurrentThemeConfigJson(theme *Theme) string {
+	file, err := ioutil.ReadFile(fmt.Sprintf("%s/%s/%s", Constants.ThemesDir, theme.Path, configFile))
+	if err != nil {
+		return ""
+	}
+	return string(file)
 }
 
 // PluginController controller for the plugin screen and plugin assets

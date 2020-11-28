@@ -36,6 +36,7 @@ func BlogController(app fiber.Router) {
 	app.Get("/blog-posts/:id", func(c *fiber.Ctx) error {
 		id := c.Params("id")
 		theme := GetCurrentTheme()
+		themeConfigJson := GetCurrentThemeConfigJson(theme)
 		bp := new(BlogPost)
 		isNew := (id == "new")
 		title := "New Blog Posts"
@@ -45,7 +46,7 @@ func BlogController(app fiber.Router) {
 			}
 			title = nameFromId(bp.Id)
 		}
-		return c.Render("views/admin/blog/form", fiber.Map{"Title": title, "IsNew": isNew, "Post": bp, "Constants": Constants, "Theme": theme}, Layout)
+		return c.Render("views/admin/blog/form", fiber.Map{"Title": title, "IsNew": isNew, "Post": bp, "Constants": Constants, "Theme": theme, "ThemeConfigJson": themeConfigJson}, Layout)
 	})
 
 	app.Get("/blog-posts", func(c *fiber.Ctx) error {

@@ -9,7 +9,10 @@
             "h1": ["sans-serif", "lh-title"],
             "h2": ["sans-serif"],
             "p": [],
-            "html": ["center", "mw6"]
+            "html": ["center", "mw6"],
+            "imageHolder": ["testholder"],
+            "image": ["testimage"],
+            "imageCaption": ["testcaption"]
         },
         "pages": [
             {"name": "Post list", "Description": "Page to list the blog posts", "path": "pages/list.jet", "type": "postlist"},

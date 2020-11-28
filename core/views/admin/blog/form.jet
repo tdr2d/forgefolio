@@ -1,13 +1,6 @@
 {{ if isset(Theme.Path) && isset(Theme.Blog.Styles) }}
 <link href="/{{ Constants.ThemesDir + "/" + Theme.Path + "/" + Theme.Blog.Styles }}" type="text/css" rel="stylesheet" />
-<script>
-var EDITORJS_CLASSES = {
-  {{ if isset(Theme.Blog.EditorClasses.H1) }}h1: [{{ range Theme.Blog.EditorClasses.H1 }}"{{ . }}",{{ end }}],{{ end }}
-  {{ if isset(Theme.Blog.EditorClasses.H2) }}h2: [{{ range Theme.Blog.EditorClasses.H2 }}"{{ . }}",{{ end }}],{{ end }}
-  {{ if isset(Theme.Blog.EditorClasses.P) }}p: [{{ range Theme.Blog.EditorClasses.P }}"{{ . }}",{{ end }}],{{ end }}
-  {{ if isset(Theme.Blog.EditorClasses.Html ) }}html: [{{ range Theme.Blog.EditorClasses.Html }}"{{ . }}",{{ end }}],{{ end }}
-};
-</script>
+<script>var THEME_CONFIG = {{ ThemeConfigJson | raw }};</script>
 {{ end }}
 <style>
 /* Fix z-index for codeflask html editor */

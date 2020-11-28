@@ -4,44 +4,33 @@ import Title from './editor/Title';
 import SubTitle from './editor/SubTitle';
 import Paragraph from './editor/Paragraph';
 import Html from './editor/Html';
+import Image from './editor/Image';
 
-const backendUrl = "medias";
-const backendAssetUrl = "assets/media/";
 const baseUrl = BASE_URL;
-
-function uploadByFile(file) {
-  const formData  = new FormData();
-  formData.append("medias", file);
-  return fetch(backendUrl, {method: 'POST', body: formData}).then((res) => {
-    return {
-      success: 1,
-      file: { url: location.origin + '/' + backendAssetUrl + file.name }
-    };
-  });
-}
+const classes = THEME_CONFIG.blog.editorClasses;
 
 const editor = new EditorJS({ 
   holder: 'editorjs',
   data: IS_NEW ? getInitialData() : POST,
   logLevel: 'VERBOSE',
   tools: {
-    title:    { class: Title,    config: { customCssClasses: EDITORJS_CLASSES ? EDITORJS_CLASSES.h1 : [] }},
-    subtitle: { class: SubTitle, config: { customCssClasses: EDITORJS_CLASSES ? EDITORJS_CLASSES.h2 : [] }},
+    title:    { class: Title,    config: { customCssClasses: classes.h1 ? classes.h1 : [] }},
+    subtitle: { class: SubTitle, config: { customCssClasses: classes.h2 ? classes.h2 : [] }},
     paragraph: {
       class: Paragraph,
       inlineToolbar: true,
-      config: { customCssClasses: EDITORJS_CLASSES ? EDITORJS_CLASSES.p : [] }
+      config: { customCssClasses: classes.p ? classes.p : [] }
     },
-    html: {class: Html, config: { customCssClasses: EDITORJS_CLASSES ? EDITORJS_CLASSES.html : [] }}
-    // image: {
-    //   class: ImageTool,
-    //   config: {
-    //     uploader: {
-    //       uploadByFile: uploadByFile
-    //     },
-    //   }
-    // }
-  },
+    html: {class: Html, config: { customCssClasses: classes.html ? classes.html : [] }},
+    image: { class: Image, config: {
+      css: {
+          image: classes.image ? classes.image : [],
+          imageHolder: classes.imageHolder ? classes.imageHolder : [],
+          imageCaption: classes.imageCaption ? classes.imageCaption : [],
+        }
+      }
+    },
+  }
 });
 
 function findTitle(editorJsData) {
@@ -67,7 +56,6 @@ document.getElementById('save-button').addEventListener('click', () => {
   .then(editorJsData => {
     title = findTitle(editorJsData);
     if (!title) {
-      // todo notify user
       return Promise.reject("Wrong title");
     }
     body = {
