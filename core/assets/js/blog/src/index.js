@@ -72,17 +72,17 @@ document.getElementById('save-button').addEventListener('click', () => {
       blocks: JSON.stringify(editorJsData.blocks)
     };
     document.getElementById('output').innerHTML = JSON.stringify(editorJsData, null, 4);
-    // return postBlogPost(body).then(() => Promise.resolve(body))
+    return postBlogPost(body).then(() => Promise.resolve(body))
   })
-  // .then((body, err) => {
-  //   if (err) {
-  //     console.error(err)
-  //   } else {
-  //     if (!IS_NEW) {
-  //       window.location.href = `${baseUrl}/blog-posts/${body.id}?notification=${encodeURIComponent("Post updated")}`;
-  //     } else {
-  //       window.location.href = `${baseUrl}/blog-posts?notification=${encodeURIComponent("New post created")}`;
-  //     }
-  //   }
-  // })
+  .then((body, err) => {
+    if (err) {
+      console.error(err)
+    } else {
+      if (!IS_NEW) {
+        window.location.href = `${baseUrl}/blog-posts/${body.id}?notification=${encodeURIComponent("Post updated")}`;
+      } else {
+        window.location.href = `${baseUrl}/blog-posts?notification=${encodeURIComponent("New post created")}`;
+      }
+    }
+  })
 })

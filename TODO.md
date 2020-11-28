@@ -1,8 +1,6 @@
 # EPIC 1: Blog page builder
-## Editor
-quote block
-render editor to html
 ## Pages
+- render editor to html
 - post list
 - post page
 - static page generator
