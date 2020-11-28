@@ -5,6 +5,7 @@ import SubTitle from './editor/SubTitle';
 import Paragraph from './editor/Paragraph';
 import Html from './editor/Html';
 import Image from './editor/Image';
+import Quote from './editor/Quote';
 
 const baseUrl = BASE_URL;
 const classes = THEME_CONFIG.blog.editorClasses;
@@ -22,7 +23,7 @@ const editor = new EditorJS({
       config: { customCssClasses: classes.p ? classes.p : [] }
     },
     html: {class: Html, config: { customCssClasses: classes.html ? classes.html : [] }},
-    image: { class: Image, config: {
+    image: { class: Image, inlineToolbar: true, config: {
       css: {
           image: classes.image ? classes.image : [],
           imageHolder: classes.imageHolder ? classes.imageHolder : [],
@@ -30,6 +31,12 @@ const editor = new EditorJS({
         }
       }
     },
+    quote: { class: Quote, inlineToolbar: true, config: {
+      css: {
+        quote: classes.quote ? classes.quote : [],
+        p: classes.p ? classes.p : []
+      }
+    }}
   }
 });
 

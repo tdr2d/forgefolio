@@ -1,27 +1,40 @@
-# Editor
-copy clipboard media url button 
+# EPIC 1: Blog page builder
+## Editor
 quote block
 render editor to html
-
-# Pages
+## Pages
 - post list
 - post page
 - static page generator
+## Settings
+blog settings
+authentication
 
+## Deployment
+docker
+standalone
+persistance storage solution
+## ForgeFolio.com v1 release
+write landing page
+write blog post
+
+# EPIC 2: Landing Page builder
 ## Landing Page Roadmap
-block
-drag and drop 
+theme blocks 
+block drag and drop 
+
+# EPIC 3: ECommerce support
 
 ## Others
-thumbnail by size
-media copy clipboard + add image by url
+i18n
 plugin prototype
 plugin page
-setting screen
 handle errors with javascript
-authentication
-newsletter
 error messages in front-end
+setting screens
+redis
+thumbnail by size
+newsletter
 e2e tests
 tls support
 

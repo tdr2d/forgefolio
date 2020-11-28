@@ -3,7 +3,7 @@
   position: absolute;
   top: 100%;
   color: #fff;
-  background-color: #2ac72b;
+  background-color: var(--color-green);
   padding: 15px;
   width: 150px;
   left: 50%;
@@ -14,7 +14,7 @@
 
 .core-notification--hidden { display: none !important; }
 .core-notification--translated {
-  transition: transform 0.35s ease-in-out, opacity 1s ease-in-out;
+  transition: transform 0.1s ease-in-out, opacity 1s ease-in-out;
   transform: translateY(-100px) !important;
 }
 .core-notification--transparent { opacity: 0 !important; }

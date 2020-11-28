@@ -1,64 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="medium-html">
 <head>
-  <meta charset="UTF-8">
-  <title>The Man Who Would Sell You Mars | Medium</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|PT+Serif:400,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medium Clone</title>
+    <link rel="stylesheet" href="/themes/blog-theme/styles.css">
 </head>
-<body>
+<body class="medium-body">
+    <header class="medium-header medium-fhc">
+        <div class="medium-header-logo medium-fhc"><img class="medium-header-logo__img" src="https://miro.medium.com/max/422/1*IOJrKVmLnRcFz3E_KrrN_Q.png"></div>
+        <div class="medium-header__items medium-fhc">
+            <a class="medium-header__item medium-a-reset" href="#">About</a>
+            <span class="medium-header__pipe"></span>
+            <a class="medium-header__item medium-a-reset" href="#">Follow</a>
+        </div>
+    </header>
 
-  <ul class="share">
-    <li>
-      <a href="#">
-        <i class="fa fa-share" aria-hidden="true"></i>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <i class="fa fa-facebook" aria-hidden="true"></i>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-      </a>
-    </li>
-  </ul>
+    <article class="medium-article">
+    <div class="medium-article-content">
+        <h1 class="medium-h1">Basic terminologies and concepts in computer world</h1>
+        <div class="medium-meta medium-f">
+            <div class="medium-meta-left medium-f">
+                <div class="medium-meta__portrait">
+                    <img src="https://miro.medium.com/fit/c/56/56/0*lXkdp6qve5P4rJgv" alt="">
+                </div>
+                <div class="medium-meta-infos medium-fvc">
+                    <a class="medium-meta__author" rel="author" class="medium-meta__name">Souvik Paul</a>
+                    <div class="medium-meta__time">
+                        <time class="medium-meta__time" pubdate datetime="2020-11-21" title="Nov 21">Nov 21</time>
+                        <span>· 10 min read</span>
+                    </div>  
+                </div>
+            </div>
+            <div class="medium-meta-shares medium-f">
+                <a class="medium-share-twitter medium-a-reset" href="#"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                <a class="medium-share-link medium-a-reset" href="#"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a>
+            </div>
+        </div>
+        <figure class="medium-hero medium-sm-fluid">
+            <img crossOrigin="anonymous" alt="Image for post" class="medium-img medium-lazy" style="height: calc(( var(--is-sm) * vw + (1 - var(--is-sm)) * 680px) * 0.3844)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAI0lEQVQYV2M8e+Lo/0s71zEIKGkyMM5oLfq/aP1RhpwwKwYArLELkElP578AAAAASUVORK5CYII=" data-src="https://miro.medium.com/max/9504/0*AKCOuaWh2WLlsy8y" data-zoomable>
+            <noscript><img class="medium-img" src="https://miro.medium.com/max/9504/0*AKCOuaWh2WLlsy8" alt="Image for post"></noscript>
+            <figcaption class="medium-hero__caption" data-selectable-paragraph="">Photo by Cookie the Pom on Unsplash</figcaption>
+        </figure>
+        <p class="medium-paragraph">
+            <span class="medium-first-letter">I</span>am writing this blog just to bring back all the memories of the basic concepts and terminologies that we learnt in our high school. I am going to discuss several topics in random manner and you can use this blog as your own personal notes just to have quick overview.
+        </p>
+        <h2 class="medium-h2">Procedural and non-procedural languages</h2>
+        <blockquote class="medium-blockquote">
+            <p class="medium-paragraph"><strong class="ht js">Note </strong>— Network layer (IP) is responsible for getting data from one node to another. Whereas the transport layer (TCP or UDP) is responsible for ensuring that data reaches the right application running on those nodes.</p>
+        </blockquote>
 
-  <div class="header" style="background-image: url(images/mars.jpg);">
-    <div class="header-filter">
-      <h1>
-        The Man Who Would Sell You Mars
-      </h1>
-      <p>How to get next?</p>
+        <figure class="medium-figure medium-sm-fluid">
+            <img crossOrigin="anonymous" class="medium-img medium-lazy" style="height: calc(( var(--is-sm) * vw + (1 - var(--is-sm)) * 680px) * 0.3844)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAGElEQVQYV2P8////fwYoYARxGhoaGEAYAJa5Cvv+M15AAAAAAElFTkSuQmCC" data-src="https://miro.medium.com/max/1436/1*Ek5fffvZXk3sIpyw6Myheg.png" alt="my alt" data-zoomable>
+             <noscript><img class="medium-img" src="https://miro.medium.com/max/1436/1*Ek5fffvZXk3sIpyw6Myheg.png" alt="Image for post"></noscript>
+            <figcaption class="medium-figure__caption">My caption is useful</figcaption>
+        </figure>
+        <p class="medium-paragraph">In short, it means to start from nothing and follow a series of steps to arrive at a fully operational system.</p>
+
+        <br><br><br>
     </div>
-  </div>
-
-  <div class="container">
-    <p>
-      <strong>Dr. Philip Davies bought his first telescope in 2010, during the post-Christmas sales.</strong> Davies, a 43-year-old family doctor from Hampshire, England, positioned the Sky-Watcher Heritage 76 Mini Dobsonian on his desk and, the night before he left for a skiing holiday in Canada, caught his first glimpse of the planet Mars in its viewfinder.
-    </p>
-    <img class="aside"src="images/mars-planet.jpg" alt="View of mars" width="400">
-    <p>
-      At a bar in Vancouver the following week, Davies struck up a conversation with a 40-something ski bum named Cam. The conversation came around, as it sometimes does on barstools, to world peace. Davies mentioned his new telescope and, from there, it was a small, boozy hop to the more expansive subject of galactic harmony.
-    </p>
-    <p>
-      Cam, it turned out, had strong opinions on the issue. <a href="https://en.wikipedia.org/wiki/Outer_Space_Treaty">The Outer Space Treaty</a>, which has since 1967 prevented the installation of weapons of mass destruction in the Earth’s orbit, on the Moon, or, in fact, on any other celestial body, was “toast,” Cam said. The OST, a treaty which more than a hundred countries have signed, is outdated at a time when schoolchildren are able to <a href="https://www.theguardian.com/science/video/2016/apr/06/cuddly-toy-dog-launched-into-space-by-schoolchildren-video">send cuddly toys into orbit</a>. It is time for a new space treaty, Cam argued, to better govern who is able to send what into space. Then he issued his final, dramatic pronouncement: humanity is on the brink of a Third World War, one destined to be waged in outer space.
-    </p>
-  </div>
-
-  <div class="footer">
-    <div class="container">
-      <a href="#">Space</a>
-      <a href="#">Science</a>
-      <a href="#">Above And Beyond</a>
-      <a href="#">Mars</a>
-      <a href="#">Real Estate</a>
-    </div>
-  </div>
-
+    </article>
+    <script src="/themes/blog-theme/main.js"></script>
 </body>
+
 </html>

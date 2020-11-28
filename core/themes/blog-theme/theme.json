@@ -6,13 +6,14 @@
     "blog": {
         "styles": "styles.css",
         "editorClasses": {
-            "h1": ["sans-serif", "lh-title"],
-            "h2": ["sans-serif"],
-            "p": [],
-            "html": ["center", "mw6"],
-            "imageHolder": ["testholder"],
-            "image": ["testimage"],
-            "imageCaption": ["testcaption"]
+            "h1": ["medium-h1"],
+            "h2": ["medium-h2"],
+            "p": ["medium-paragraph"],
+            "html": ["center"],
+            "imageHolder": ["medium-figure", "medium-sm-fluid"],
+            "image": ["medium-img"],
+            "imageCaption": ["medium-figure__caption"],
+            "quote": "medium-blockquote"
         },
         "pages": [
             {"name": "Post list", "Description": "Page to list the blog posts", "path": "pages/list.jet", "type": "postlist"},

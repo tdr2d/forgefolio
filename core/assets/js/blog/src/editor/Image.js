@@ -1,3 +1,5 @@
+import {CreateElement} from '../utils';
+
 export default class Image {
   static get toolbox() {
     return {
@@ -9,28 +11,25 @@ export default class Image {
   constructor({ data, config, api, readOnly }) {
     this.api = api;
     this.readOnly = readOnly;
-    this.blockIndex = this.api.blocks.getCurrentBlockIndex() + 1; // When block is only constructing, current block points to previous block. So real block index will be +1 after rendering
-    console.log(config);
     this.CSS = Object.assign({
       loading: this.api.styles.loader,
       settingsButton: this.api.styles.settingsButton,
       settingsButtonActive: this.api.styles.settingsButtonActive,
     }, config.css);
-    console.log(this.CSS);
-
+    
     this.data = {
       url: data.url || '',
       caption: data.caption || '',
     };
 
     this.nodes = {
-      wrapper: this._make('div', ['f']),
-      input: this._make('input', [this.api.styles.input], {"placeholder": "Image url"}),
-      submitButton: this._make('button', ['button', 'button--blue'], {}, "Submit"),
-      loader: this._make('div', this.CSS.loading),
-      imageHolder: this._make('figure', this.CSS.imageHolder),
-      image: this._make('img', this.CSS.image),
-      caption: this._make('figcaption', this.CSS.imageCaption, {contentEditable: !this.readOnly, innerHTML: this.data.caption || ''}),
+      wrapper: CreateElement('div', ['f']),
+      input: CreateElement('input', [this.api.styles.input], {"placeholder": "Image url"}),
+      submitButton: CreateElement('button', ['button', 'button--blue'], {}, "Submit"),
+      loader: CreateElement('div', this.CSS.loading),
+      imageHolder: CreateElement('figure', this.CSS.imageHolder),
+      image: CreateElement('img', this.CSS.image, {crossOrigin: "anonymous"}),
+      caption: CreateElement('figcaption', this.CSS.imageCaption, {contentEditable: true, innerHTML: this.data.caption || ''}),
     };
     this.nodes.submitButton.onclick = this.onInputSubmit.bind(this);
     this.nodes.caption.dataset.placeholder = 'Enter a caption';
@@ -38,13 +37,13 @@ export default class Image {
     this.settings = [
       {
         name: 'Input View',
-        el: this._make('div'),
+        el: CreateElement('div'),
         view: "input",
         icon: '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M21 3.01H3c-1.1 0-2 .9-2 2V9h2V4.99h18v14.03H3V15H1v4.01c0 1.1.9 1.98 2 1.98h18c1.1 0 2-.88 2-1.98v-14c0-1.11-.9-2-2-2zM11 16l4-4-4-4v3H1v2h10v3z"/></svg>',
       },
       {
         name: 'Image View',
-        el: this._make('div'),
+        el: CreateElement('div'),
         view: "visual",
         icon: Image.toolbox.icon
       }
@@ -74,14 +73,26 @@ export default class Image {
 
     this.nodes.image.onload = () => {
       this.nodes.wrapper.innerHTML = "";
+      this.nodes.imageHolder.innerHTML = "";
       this.nodes.imageHolder.appendChild(this.nodes.image);
       this.nodes.imageHolder.appendChild(this.nodes.caption);
       this.nodes.wrapper.appendChild(this.nodes.imageHolder);
+      this._computeImageData();
     };
     this.nodes.image.onerror = (e) => {
       console.log('Failed to load an image', e);
       this._updateView('input');
     };
+  }
+
+  _computeImageData() {
+    var canvas = document.createElement('CANVAS');
+    var ctx = canvas.getContext('2d');
+    canvas.height = 2;
+    canvas.width = 3;
+    ctx.drawImage(this.nodes.image, 0, 0, canvas.width, canvas.height);
+    this.data.pixels = canvas.toDataURL();
+    this.data.hwratio = this.nodes.image.height / this.nodes.image.width;
   }
 
   onInputSubmit() {
@@ -116,20 +127,6 @@ export default class Image {
     });
     return wrapper;
   };
-
-  _make(tagName, classNames = null, attributes = {}, content = null) {
-    const el = document.createElement(tagName);
-    if (Array.isArray(classNames)) {
-      el.classList.add(...classNames);
-    } else if (classNames) {
-      el.classList.add(classNames);
-    }
-    for (const attrName in attributes) {
-      el[attrName] = attributes[attrName];
-    }
-    if (content) { el.innerHTML = content; }
-    return el;
-  }
 
   _updateView(view) {
     this._view = view;

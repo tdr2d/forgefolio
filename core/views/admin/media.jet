@@ -21,8 +21,9 @@
     <div class="core-media-infos f fsb">
       <input id="checkbox-{{ .Name }}" class="core-media-checkbox" type="checkbox" data-name="{{ .Name }}{{ .Ext }}">
       <a href="/{{ Constants.MediaDir }}/{{ .Name }}{{ .Ext }}" class="feather-small button--icon" target="_blank"><i data-feather="airplay"></i></a>
+      <button id="copy-{{ .Name }}" class="button--icon feather-small" style="padding-left: 1px;" onclick="copyClipBoard('copy-{{ .Name }}')"><i data-feather="copy"></i></button>
       <input type=text class="core-media-infos__input core-input-text fg" value="{{ .Name }}" data-name="{{ .Name }}" data-ext="{{ .Ext }}">
-      <button class="core-media-infos__save feather-small button--icon" type="button"><i data-feather="save"></i></button>
+      <button class="core-media-infos__save feather-small button--icon" type="button" style="padding-right: 3px; padding-left: 0px;"><i data-feather="save"></i></button>
     </div>
   </figure>
   {{ end }}
@@ -42,6 +43,13 @@ __input_file.addEventListener("change", function() {
 var __core_media_checked = new Set();
 var __core_media_countEl = document.getElementById('media-count');
 var __core_media_deleteEl = document.getElementById('media-delete-button');
+function copyClipBoard(id) {
+  const btn = document.getElementById(id);
+  const data = btn.previousElementSibling.href;
+  navigator.clipboard.writeText(data).then(function() {
+    CoreNotificationNotify("Copied");
+  });
+}
 
 // Checkboxes
 document.querySelectorAll('.core-media-checkbox').forEach(function(checkbox){

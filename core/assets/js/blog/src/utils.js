@@ -20,6 +20,12 @@ export function getInitialData(){
             "url": "https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?w=500",
             "caption": "My caption"
         }
+      },
+      {
+        "type": "quote",
+        "data": {
+            "text": "I love to travel, but I hate to arrive. (A. Einstein)"
+        }
       }
       // {
       //   "type": "html",
@@ -40,16 +46,16 @@ export function setEditorClasses(config, element) {
   }
 }
 
-
-const backendUrl = "medias";
-const backendAssetUrl = "assets/media/";
-function uploadByFile(file) {
-  const formData  = new FormData();
-  formData.append("medias", file);
-  return fetch(backendUrl, {method: 'POST', body: formData}).then((res) => {
-    return {
-      success: 1,
-      file: { url: location.origin + '/' + backendAssetUrl + file.name }
-    };
-  });
+export function CreateElement(tagName, classNames = null, attributes = {}, content = null) {
+  const el = document.createElement(tagName);
+  if (Array.isArray(classNames)) {
+    el.classList.add(...classNames);
+  } else if (classNames) {
+    el.classList.add(classNames);
+  }
+  for (const attrName in attributes) {
+    el[attrName] = attributes[attrName];
+  }
+  if (content) { el.innerHTML = content; }
+  return el;
 }

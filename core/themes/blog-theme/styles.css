@@ -1,0 +1,177 @@
+/* Global */
+:root   { --is-sm: 0; }
+@media screen and (max-width: 700px) {
+    :root {--is-sm: 1}
+}
+
+.medium-html {height: 100%}
+.medium-body {
+    height: 100%;
+    overflow-y: auto;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    color: rgba(0,0,0,0.8);
+    min-height: 100vh;
+    position: relative;
+}
+.medium-a-reset {
+    text-decoration: none;
+    color: inherit;
+}
+.medium-f { display: flex;}
+.medium-fhc { display: flex; align-items: center;}
+.medium-fvc { display: flex; flex-direction: column; justify-content: center;}
+
+/* Header */
+.medium-header {
+    height: 60px;
+    padding: 0 64px;
+    line-height: 60px;
+    background-color: rgba(249, 249, 249, 1);
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+.medium-header-logo {
+    width: 200px;
+    height: 100%;
+    margin-right: 40px;
+}
+.medium-header-logo__img {
+    height: 36px;
+    width: auto;
+}
+.medium-header__items {
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.medium-header__pipe {
+    margin: 0 10px;
+    height: 19px;
+    width: 1px;
+    background: rgba(0,0,0,0.8);
+}
+@media screen and (max-width: 700px) {
+    .medium-header{ padding: 0 3%; overflow-x: auto; }
+    .medium-header-logo{ margin-right: 3% }
+}
+
+/* Article */
+.medium-article {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.medium-article-content {
+    width: 680px;
+    box-sizing: border-box;
+}
+.medium-h1 {
+    font-size: 48px;
+    font-weight: 400;
+    margin: 0.55em 0 0.55em 0;
+    letter-spacing: -0.011em;
+    line-height: 1.18;
+    font-family: fell, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+.medium-h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 1.72em;
+    line-height: 28px;
+}
+.medium-first-letter {
+    position: relative;
+    font-family: fell, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 66px;
+    line-height: .83;
+    margin-right: 0.18em;
+    padding-top: 7px;
+    box-sizing: border-box;
+    float: left;
+}
+.medium-paragraph {
+    margin-top: 1.8em;
+    font-size: 20px;
+    line-height: 1.6;
+    font-weight: 400;
+    word-break: break-word;
+    letter-spacing: -0.003em;
+}
+
+.medium-blockquote {
+    margin-left: -20px;
+    padding-left: 23px;
+    box-shadow: inset 3px 0 0 0 rgba(41, 41, 41, 1);
+    font-style: italic;
+}
+
+@media screen and (max-width: 700px) {
+    .medium-article-content {  width: 100%; padding: 0 3%; }
+    .medium-first-letter{font-size: 53px; padding-top: 9px;}
+    .medium-h1 { font-size: 40px; }
+    .medium-h2 { font-size: 20px; }
+    .medium-paragraph { font-size: 18px; }
+    .medium-blockquote{ margin-left: 0; }
+    .medium-sm-fluid { width: calc(100% + 6% + 2px); margin-left: calc(-3% - 1px) !important; }
+}
+
+/* Meta */
+.medium-meta { display: flex; }
+.medium-meta__portrait {
+    border-radius: 100px;
+    overflow: hidden;
+    height: 46px;
+    width: 46px;
+}
+.medium-meta__portrait > img {height: 46px; width: auto;}
+.medium-meta-left {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+}
+.medium-meta-infos { margin-left: 12px; }
+.medium-meta__time {
+    color: rgba(0,0,0,0.6);
+}
+.medium-meta-shares {
+    margin-left: auto;
+    align-self: center;
+    color: rgba(0,0,0,0.6);
+}
+.medium-meta-shares > a { display: block; padding-right: 8px; }
+.medium-meta-shares > a:last-child { padding-right: 0; }
+
+/* Hero */
+.medium-hero {
+    margin: 2.55em 0 0 0;
+}
+.medium-hero__caption {
+    color: rgba(0,0,0,0.6);
+    font-size: small;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 0.75em;
+}
+
+/* Image */
+.medium-img {
+    transition: 0.2s ease-in-out;
+    width: 100%;
+    height: auto;
+}
+.medium-lazy {
+    filter: blur(7px);
+}
+.medium-figure {
+    margin: 2.55em 0 0 0;
+}
+.medium-figure__caption {
+    color: rgba(0,0,0,0.6);
+    font-size: small;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 0.75em;
+}
