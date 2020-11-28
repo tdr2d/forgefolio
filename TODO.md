@@ -1,10 +1,9 @@
-# Features
-
 ## Blog Roadmap
+medium clone
 # Editor
-custom html
-image
+image by url
 render editor to html
+copy links
 
 # Pages
 - post list

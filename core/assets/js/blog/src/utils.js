@@ -26,11 +26,6 @@ export function getInitialData(){
   };
 }
 
-// FIXME import from jet
-export const EDITORJS_IDENTIFIERS = {
-  paragraph: "my-paragraph"
-}
-
 export function setEditorClasses(config, element) {
   if (config && config.customCssClasses && config.customCssClasses && config.customCssClasses.length > 0) {
     config.customCssClasses.forEach(e => {

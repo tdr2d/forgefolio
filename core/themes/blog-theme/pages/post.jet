@@ -1,31 +1,64 @@
+<!DOCTYPE html>
 <html lang="en">
-<title>I’m cloning this Medium article in HTML without writing any CSS, thanks to Tachyons.</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+<head>
+  <meta charset="UTF-8">
+  <title>The Man Who Would Sell You Mars | Medium</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|PT+Serif:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <section class="center mw5 mw7-ns">
-        <article class="serif f4 lh-copy">
-            <h1 class="sans-serif lh-title">I’m cloning this Medium article in HTML without writing any CSS, thanks to Tachyons. (Day 1).</h1>
-            <p>The problem with radical ideas is that they provoke strong gut reactions.</p>
-            <p>CSS frameworks are no exception…</p>
-            <p>If this had been the first thing I read about Tachyons, I’m not sure I’d have wanted to try it either:</p>
-            <div class="center mw6">
-                <blockquote class="twitter-tweet" data-lang="en">
-                    <p lang="en" dir="ltr">Huh, just came across <a href="https://t.co/TgjqOJhZDW">https://t.co/TgjqOJhZDW</a> for the first time.<br><br>Worst web dev idea of all time, or just a really bad one?</p>&mdash; Dave Shea (@mezzoblue) <a href="https://twitter.com/mezzoblue/status/794419442272714752">November 4, 2016</a>
-                </blockquote>
-                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-            <p>But because I don’t code every day, questions about syntax and best-practice come second fiddle to ease-of-use for me.</p>
-            <p>Basically, I just want tools that help me make good-looking websites, faster:</p>
-            <p>Can I get up and running quickly?<br> Do the ready-made components look good?<br> Is the codebase something I could get my head round?</p>
-            <p>(Which has always made mega-frameworks like Bootstrap unappealing to me.)</p>
-            <h2 class="sans-serif">So what is Tachyons?</h2>
-            <p>Tachyons is a framework created by Adam Morse to make working with CSS easier. The Tachyons homepage sets out his objectives for the project:</p>
-            <blockquote> Built for designing. Create fast loading, highly readable, and 100% responsive interfaces with as little css as possible.</blockquote>
-            <p>Sounds good right?</p>
-        </article>
-    </section>
-</body>
 
+  <ul class="share">
+    <li>
+      <a href="#">
+        <i class="fa fa-share" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+
+  <div class="header" style="background-image: url(images/mars.jpg);">
+    <div class="header-filter">
+      <h1>
+        The Man Who Would Sell You Mars
+      </h1>
+      <p>How to get next?</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <p>
+      <strong>Dr. Philip Davies bought his first telescope in 2010, during the post-Christmas sales.</strong> Davies, a 43-year-old family doctor from Hampshire, England, positioned the Sky-Watcher Heritage 76 Mini Dobsonian on his desk and, the night before he left for a skiing holiday in Canada, caught his first glimpse of the planet Mars in its viewfinder.
+    </p>
+    <img class="aside"src="images/mars-planet.jpg" alt="View of mars" width="400">
+    <p>
+      At a bar in Vancouver the following week, Davies struck up a conversation with a 40-something ski bum named Cam. The conversation came around, as it sometimes does on barstools, to world peace. Davies mentioned his new telescope and, from there, it was a small, boozy hop to the more expansive subject of galactic harmony.
+    </p>
+    <p>
+      Cam, it turned out, had strong opinions on the issue. <a href="https://en.wikipedia.org/wiki/Outer_Space_Treaty">The Outer Space Treaty</a>, which has since 1967 prevented the installation of weapons of mass destruction in the Earth’s orbit, on the Moon, or, in fact, on any other celestial body, was “toast,” Cam said. The OST, a treaty which more than a hundred countries have signed, is outdated at a time when schoolchildren are able to <a href="https://www.theguardian.com/science/video/2016/apr/06/cuddly-toy-dog-launched-into-space-by-schoolchildren-video">send cuddly toys into orbit</a>. It is time for a new space treaty, Cam argued, to better govern who is able to send what into space. Then he issued his final, dramatic pronouncement: humanity is on the brink of a Third World War, one destined to be waged in outer space.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <a href="#">Space</a>
+      <a href="#">Science</a>
+      <a href="#">Above And Beyond</a>
+      <a href="#">Mars</a>
+      <a href="#">Real Estate</a>
+    </div>
+  </div>
+
+</body>
 </html>
